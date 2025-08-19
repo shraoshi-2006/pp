@@ -23,6 +23,6 @@ This website showcases my skills, projects, and journey as a **Web Developer** �
 ---
 
 ## 🚀 Live Demo  
-🔗 [Click here to view portfolio](https://your-github-username.github.io/your-repo-name/)  
+🔗 [Click here to view portfolio](https://github.com/shraoshi-2006/pp)  
 
 
