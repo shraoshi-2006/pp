@@ -40,12 +40,16 @@ document.addEventListener("DOMContentLoaded", function() {
   // Initialize Typed.js
   if (typeof Typed !== 'undefined') {
     new Typed("#element", {
-      strings: ["Web Developer", "Cyber Security Enthusiast", "Python Programmer", "C & C++ Programmer"],
-      typeSpeed: 50,
-      backSpeed: 30,
-      backDelay: 1500,
-      loop: true
-    });
+  strings: [
+    "Web Developer",
+    "Cyber Security Enthusiast"
+  ],
+  typeSpeed: 50,
+  backSpeed: 30,
+  backDelay: 1500,
+  loop: true
+});
+
   }
   
   // Theme toggle functionality
