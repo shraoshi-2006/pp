@@ -39,60 +39,72 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="home" class="firstSection">
-    <div class="leftSection">
-      Hii, myself <span class="yellow">Shraoshi Basak</span>
-      <div>and I am a passionate</div>
-      <span id="element"></span>
-    </div>
-    <div class="rightSection">
-      <img src="bgg.png.png" alt="Portfolio Image">
-    </div>
-  </section>
+  <section class="heroSection" id="home">
+  <div class="hero-content">
 
-  <!-- About Section -->
+    <h1 class="hero-title">
+      Myself <span>Shraoshi Basak</span>
+    </h1>
+
+    <h2 class="hero-subtitle">Cyber Security Student & Web Developer</h2>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="hero-btn hero-btn-primary">View Projects</a>
+      <a href="resume.pdf" class="hero-btn hero-btn-secondary">Download Resume</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+  <span>Scroll to explore</span>
+  <div class="mouse">
+    <div class="wheel"></div>
+  </div>
+</div>
+</section>
+
+
+<!--About Section -->
   <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <div class="about-content">
-      <div class="about-text">
-        <h3 class="reveal">Cyber Security Student at Guru Nanak Institute of Technology</h3>
-        <p class="reveal">
-          I'm currently pursuing <strong>B.Sc. in Cyber Security (2024–2028)</strong>. 
-          My goal is to combine <strong>security and creativity</strong> to develop 
-          web applications that are both <em>safe</em> and <em>delightful to use</em>.
-        </p>
-        <p class="reveal">
-          My journey began with a love for <strong>user-friendly design</strong> 
-          and has grown into a deep interest in <strong>cyber security</strong>. 
-          I'm committed to applying best practices to ensure that 
-          the applications I build are <strong>robust and secure</strong>.
-        </p>
-      </div>
-      
-      <div class="about-image reveal">
-        <img src="shraoshi.jpg.jpeg" alt="Shraoshi Basak">
+  <h2 class="section-title">About Me</h2>
+
+  <div class="about-content">
+
+    <!-- LEFT : TEXT + EDUCATION -->
+    <div class="about-text">
+
+      <p>
+        I'm currently pursuing <strong>B.Sc. in Cyber Security</strong> at
+        <strong>Guru Nanak Institute of Technology</strong>.
+        I enjoy building secure and user-friendly web applications.
+      </p>
+
+      <!-- EDUCATION (inside About, no new section) -->
+      <div class="education">
+        <ul class="timeline">
+  <li class="timeline-item">
+    <span class="year">2024–2028</span>
+    <p>B.Sc Cyber Security - Guru Nanak Institute of Technology, MAKAUT</p>
+  </li>
+
+  <li class="timeline-item">
+    <span class="year">2024</span>
+    <p>Higher Secondary - Uttarpara Girls' High School (UGHS), WBCHSE</p>
+  </li>
+
+  <li class="timeline-item">
+    <span class="year">2022</span>
+    <p>Secondary - Uttarpara Childrens' Own Home (UCOH), WBBSE</p>
+  </li>
+</ul>
       </div>
     </div>
 
-    <!-- Education Timeline -->
-    <div class="education">
-      <h4>🎓 Education</h4>
-      <ul class="timeline">
-        <li class="timeline-item">
-          <span class="year">2024–2028</span>
-          <p>B.Sc Cyber Security - Guru Nanak Institute of Technology, MAKAUT</p>
-        </li>
-        <li class="timeline-item">
-          <span class="year">2024</span>
-          <p>Higher Secondary - Uttarpara Girls' High School (UGHS), WBCHSE</p>
-        </li>
-        <li class="timeline-item">
-          <span class="year">2022</span>
-          <p>Secondary - Uttarpara Childrens' Own Home (UCOH), WBBSE</p>
-        </li>
-      </ul>
+    <!-- RIGHT : IMAGE -->
+    <div class="about-image">
+      <img src="shraoshi.jpg.jpeg" alt="Shraoshi Basak">
     </div>
-  </section>
+
+  </div>
+</section>
 
   <!-- Skills Section -->
   <section id="skills" class="skillsSection">
@@ -131,77 +143,104 @@
     </div>
   </section>
 
+  <section id="projects">
+  <h2>Projects</h2>
+<!-- Projects Section -->
+  <div class="project-card">
+    <h3>🔐 Password Strength Checker</h3>
+
+    <p>
+      A web-based password strength analyzer that evaluates passwords in real time
+      based on length, character diversity, and security best practices.
+    </p>
+
+    <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+
+    <div class="project-links">
+      <a href="https://password-checker-delta-three.vercel.app/" target="_blank">Live Demo</a>
+      <a href="https://github.com/shraoshi-2006/password_checker" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
   <!-- Work Experience Section -->
-  <section id="experience" class="secondSection">
-    <h1>Work Experience</h1>
-    <div class="box">
-      <div class="verticle">
-        <div class="content">
-          <h3>Cyber Security Intern</h3>
-          <p>Worked on penetration testing and vulnerability assessment.</p>
-        </div>
-      </div>
-      <div class="verticle">
-        <div class="content">
-          <h3>Web Developer</h3>
-          <p>Created responsive websites using HTML, CSS, JavaScript.</p>
-        </div>
-      </div>
-      <div class="verticle">
-        <div class="content">
-          <h3>Python Programmer</h3>
-          <p>Developing automation scripts and backend logic.</p>
-        </div>
-      </div>
-      <div class="verticle">
-        <div class="content">
-          <h3>C & C++ Programmer</h3>
-          <p>Implemented data structures, algorithms, and problem-solving projects.</p>
-        </div>
-      </div>
+  <section id="experience" class="experienceSection">
+  <h2 class="section-title">Work Experience</h2>
+
+  <div class="experience-container">
+    <div class="experience-card">
+      <h3>Cyber Security Intern</h3>
+      <p>Worked on penetration testing, vulnerability assessment and security analysis.</p>
     </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contactSection">
-    <h2>Contact Me</h2>
-    
-    <div class="contact-container">
-      <a href="https://www.google.com/maps/place/49,+Rajendra+Avenue,+Uttarpara,+Hooghly,+712258" 
-         target="_blank" class="contact-card">
-        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-        <h3>Address</h3>
-      </a>
-
-      <a href="tel:+919163560254" class="contact-card">
-        <div class="icon-circle"><i class="fas fa-phone"></i></div>
-        <h3>Call</h3>
-      </a>
-
-      <a href="mailto:shraoshi.2006@gmail.com" class="contact-card">
-        <div class="icon-circle"><i class="fas fa-envelope"></i></div>
-        <h3>Email</h3>
-      </a>
-
-      <a href="https://www.instagram.com/its_me_shraoxi_official/" 
-         target="_blank" class="contact-card">
-        <div class="icon-circle"><i class="fab fa-instagram"></i></div>
-        <h3>Instagram</h3>
-      </a>
-
-      <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" 
-         target="_blank" class="contact-card">
-        <div class="icon-circle"><i class="fab fa-linkedin"></i></div>
-        <h3>LinkedIn</h3>
-      </a>
-
-      <a href="https://github.com/shraoshi-2006" 
-         target="_blank" class="contact-card">
-        <div class="icon-circle"><i class="fab fa-github"></i></div>
-        <h3>GitHub</h3>
-      </a>
+    <div class="experience-card">
+      <h3>Web Developer</h3>
+      <p>Built responsive and accessible websites using HTML, CSS and JavaScript.</p>
     </div>
-  </section>
+
+    <div class="experience-card">
+      <h3>Python Programmer</h3>
+      <p>Developed automation scripts and backend logic using Python.</p>
+    </div>
+
+    <div class="experience-card">
+      <h3>C & C++ Programmer</h3>
+      <p>Implemented data structures, algorithms and problem-solving projects.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2 class="section-title">Reach Out</h2>
+
+  <div class="contact-container">
+
+    <!-- MESSAGE FORM -->
+    <div class="contact-form-wrapper">
+      <form class="contact-form">
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <textarea placeholder="Drop a line"></textarea>
+        <button>SEND MESSAGE</button>
+      </form>
+    </div>
+
+    <!-- CONTACT DETAILS -->
+    <div class="contact-info-wrapper">
+  <h3>Contact Details</h3>
+
+  <div class="contact-item">
+    <span class="contact-icon">📍</span>
+    <span>49, Rajendra Avenue, Uttarpara, Hooghly, 712258</span>
+  </div>
+
+  <div class="contact-item">
+    <span class="contact-icon">📞</span>
+    <span>+91 91635 60254</span>
+  </div>
+
+  <div class="contact-item">
+    <span class="contact-icon">✉️</span>
+    <span>shraoshi.2006@gmail.com</span>
+  </div>
+
+  <!-- 🔽 SOCIAL ICONS (EMAIL ER NICHE) -->
+  <div class="contact-socials">
+    <a href="https://github.com/shraoshi-2006" target="_blank" class="contact-card"> 
+      <div class="icon-circle"><i class="fab fa-github"></i></div> <h3>GitHub</h3>
+    </a>
+    <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" target="_blank" class="contact-card">
+      <div class="icon-circle"><i class="fab fa-linkedin-in"></i></div> <h3>LinkedIn</h3>
+    </a>
+    <a href="https://www.instagram.com/its_me_shraoxi/" target="_blank" class="contact-card">
+      <div class="icon-circle"><i class="fab fa-instagram"></i></div> <h3>Instagram</h3>
+    </a>
+  </div>
+</div>
+</section>
+
 
   <!-- Footer -->
   <footer>
@@ -218,6 +257,4 @@
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
   <script src="script.js"></script>
 </body>
-
 </html>
-
