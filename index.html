@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Header -->
   <header>
@@ -199,12 +200,60 @@
 
     <!-- MESSAGE FORM -->
     <div class="contact-form-wrapper">
-      <form class="contact-form">
-        <input type="text" placeholder="Name">
-        <input type="email" placeholder="Email">
-        <textarea placeholder="Drop a line"></textarea>
-        <button>SEND MESSAGE</button>
-      </form>
+      <form id="contact-form" class="contact-form">
+
+  <input
+    type="text"
+    name="from_name"
+    placeholder="Name"
+    required
+  >
+
+  <input
+    type="email"
+    name="from_email"
+    placeholder="Email"
+    required
+  >
+
+  <textarea
+    name="message"
+    placeholder="Drop a line"
+    required
+  ></textarea>
+
+  <button type="submit">SEND MESSAGE</button>
+
+</form>
+
+
+<script>
+  (function () {
+    emailjs.init("YOUR_PUBLIC_KEY");
+  })();
+
+  window.onload = function () {
+    document
+      .getElementById("contact-form")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        emailjs.sendForm(
+          "service_ommgjzi",
+          "template_715eyqi",
+          this
+        ).then(
+          function () {
+            alert("Message sent successfully ✅");
+          },
+          function (error) {
+            alert("FAILED ❌ " + error.text);
+          }
+        );
+      });
+  };
+</script>
+
     </div>
 
     <!-- CONTACT DETAILS -->
@@ -257,4 +306,24 @@
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
   <script src="script.js"></script>
 </body>
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_ommgjzi",
+      "template_715eyqi",
+      this
+    ).then(
+      function () {
+        alert("Message sent successfully!");
+        document.getElementById("contact-form").reset();
+      },
+      function (error) {
+        alert("Failed to send message 😢");
+        console.log(error);
+      }
+    );
+  });
+</script>
 </html>
