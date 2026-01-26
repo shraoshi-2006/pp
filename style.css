@@ -58,14 +58,14 @@ body {
 header {
   background: #000000;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 10px;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  height: auto;
-  min-height: 70px;
+  height: 60px;
+  min-height: 40px;
   display: flex;
   align-items: center;
 }
@@ -811,42 +811,47 @@ color: #ffffff;
    CONTACT FORM
 ========================= */
 
+.contact-form {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 20px;
-  background: #111c2e;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: #fff;
-  font-size: 1rem;
+  background: rgba(38, 16, 82, 0.9);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 16px;
+  color: white;
   outline: none;
 }
 
 .contact-form textarea {
-  min-height: 140px;
+  height: 160px;
   resize: none;
 }
 
-/* Button */
 .contact-form button {
-  width: 100%;
-  padding: 14px;
+  margin-top: 10px;
   background: #8b5cf6;
-  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 1.05rem;
-  letter-spacing: 1px;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 .contact-form button:hover {
   background: #7c3aed;
-  transform: translateY(-2px);
 }
+
 
 /* =========================
    RESPONSIVE
@@ -1244,4 +1249,16 @@ footer a:hover {
 .education span {
   font-size: 0.95rem;
   opacity: 0.8;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 9999;
+  position: relative;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
 }
