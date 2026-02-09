@@ -1,4 +1,22 @@
 /* CSS Variables for Theming */
+/* =====================================================
+   THEME SYSTEM (JS COMPATIBLE)
+===================================================== */
+
+/* 🌙 DARK MODE — DEFAULT */
+:root {
+  --primary-bg: linear-gradient(135deg, #000000, #240260, #000000);
+  --contact-bg: linear-gradient(135deg, #372358, #240260, #000000);
+  --footer-bg: #5f0545;
+
+  --text-color: #ffffff;
+  --accent-color: hsl(52, 87%, 48%);
+  --accent-hover: #ffcc00;
+
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
 :root {
   --primary-bg: linear-gradient(135deg, #000000, #240260, #000000);
   --secondary-bg: linear-gradient(135deg, #240260, #240260, #000000);
@@ -17,23 +35,82 @@
   --shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.light-mode {
-  --primary-bg: linear-gradient(135deg, #f5f7fa, #c3cfe2, #f5f7fa);
-  --secondary-bg: linear-gradient(135deg, #c9ffbf, #a8c0ff, #f5f7fa);
-  --contact-bg: linear-gradient(135deg, #d4c4fb, #a8c0ff, #f5f7fa);
-  --footer-bg: #e66465;
-  --text-color: #333333;
-  --accent-color: #6c5ce7;
-  --accent-hover: #4a3fb5;
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(108, 92, 231, 0.3);
-  --timeline-color: #6c5ce7;
-  --skill-color: #6c5ce7;
-  --experience-bg: linear-gradient(135deg, #74ebd5, #9face6);
-  --icon-bg: #6c5ce7;
-  --icon-hover: #a29bfe;
-  --shadow: 0 8px 25px rgba(108, 92, 231, 0.15);
+/* 🌞 LIGHT MODE — DARK MODE INSPIRED */
+[data-theme="light"] {
+  /* Backgrounds */
+  --primary-bg: linear-gradient(135deg, #e6e0f8, #f8f5ff); /* light purple / white vibe */
+  --contact-bg: linear-gradient(135deg, #f0eaff, #e0d8ff); /* subtle purple for contact */
+  --footer-bg: #d1c4ff; /* soft purple footer */
+
+  /* Text */
+  --text-color: #1a1a2e; /* dark enough for readability */
+  --accent-color: #5b4bd6; /* purple accent similar to dark-mode golden vibe */
+  --accent-hover: #3f32b5; /* darker purple for hover */
+
+  /* Cards */
+  --card-bg: rgba(255, 255, 255, 0.95); /* slightly transparent, soft white cards */
+  --card-border: rgba(91, 75, 214, 0.3); /* subtle border for cards */
+
+  /* Timeline & Skills */
+  --timeline-color: #5b4bd6;
+  --skill-color: #5b4bd6;
+
+  /* Shadows */
+  --shadow: 0 10px 25px rgba(36, 2, 96, 0.1); /* soft shadow like dark-mode */
 }
+
+/* ================== LIGHT MODE HERO FIX ================== */
+[data-theme="light"] .heroSection {
+    color: #111111; /* Hero main text black */
+}
+
+[data-theme="light"] .hero-title span {
+    color: #6c5ce7; /* Name Shraoshi Basak purple */
+}
+
+/* Scroll to explore text color */
+[data-theme="light"] .scroll-indicator span {
+    color: #111111; /* black */
+}
+
+/* Scroll indicator mouse wheel border */
+[data-theme="light"] .scroll-indicator .mouse {
+    border: 2px solid #111111; /* black border */
+}
+
+[data-theme="light"] .scroll-indicator .wheel {
+    background-color: #111111; /* black wheel */
+}
+
+
+/* Contact section theme for light mode */
+[data-theme="light"] #contact {
+    background: linear-gradient(135deg, #f0f0f0, #dcdcff);
+}
+
+[data-theme="light"] #contact h2,
+[data-theme="light"] #contact h3 {
+    color: #333333;
+}
+
+[data-theme="light"] #contact input,
+[data-theme="light"] #contact textarea,
+[data-theme="light"] #contact button {
+    background-color: #ffffff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+[data-theme="light"] .contact-item span {
+    color: #555;
+}
+
+[data-theme="light"] .contact-socials a .icon-circle {
+    background-color: #6c5ce7;
+    color: #fff;
+}
+
+/* Global Styles */
 
 * {
   margin: 0;
@@ -116,23 +193,28 @@ header {
   gap: 15px;
 }
 
-/* Theme Toggle */
-.theme-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--accent-color);
-  font-size: 1.2rem;
+/* Theme toggle button styling and hover affordance */
+#theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-left: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1200; 
 }
 
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
+#theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    color: var(--primary);
+    background: rgba(139, 92, 246, 0.1);
 }
 
 /* Toggle button */
@@ -619,7 +701,7 @@ color: #ffffff;
 }
 
 .project-card p {
-  color: #ffffff;
+  color: #090900;
   line-height: 1.6;
 }
 
