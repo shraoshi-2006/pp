@@ -38,8 +38,8 @@
 /* 🌞 LIGHT MODE — DARK MODE INSPIRED */
 [data-theme="light"] {
   /* Backgrounds */
-  --primary-bg: linear-gradient(135deg, #e6e0f8, #f8f5ff); /* light purple / white vibe */
-  --contact-bg: linear-gradient(135deg, #f0eaff, #e0d8ff); /* subtle purple for contact */
+  --primary-bg: linear-gradient(135deg, #baa5f9, #cbb9f5); /* light purple / white vibe */
+  --contact-bg: linear-gradient(135deg, #4c00ff, #a49cc8); /* subtle purple for contact */
   --footer-bg: #d1c4ff; /* soft purple footer */
 
   /* Text */
@@ -59,7 +59,7 @@
   --shadow: 0 10px 25px rgba(36, 2, 96, 0.1); /* soft shadow like dark-mode */
 }
 
-/* ================== LIGHT MODE HERO FIX ================== */
+/* ================== LIGHT MODE HERO ================== */
 [data-theme="light"] .heroSection {
     color: #111111; /* Hero main text black */
 }
@@ -266,7 +266,7 @@ header {
 .heroSection .hero-subtitle {
   font-size: 1.6rem;
   font-weight: 500;
-  color: #b9b4ff;
+  color: hsl(0, 0%, 100%);
   margin-bottom: 35px;
 }
 
@@ -950,7 +950,7 @@ color: #ffffff;
 /* Footer */
 footer {
   background: var(--footer-bg);
-  color: white;
+  color: rgb(6, 0, 0);
   text-align: center;
   padding: 20px;
   position: relative;
