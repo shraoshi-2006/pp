@@ -1,330 +1,630 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <!-- Basic Document Information -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shraoxi - Developer Portfolio</title>
+  <meta name="theme-color" content="#240260">
+
+  <title>Shraoshi Basak | Cyber Security Student & Web Developer</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Portfolio of Shraoshi Basak, a Cyber Security student and Web Developer showcasing projects, skills and experience.">
+  <meta name="keywords" content="Shraoshi Basak, Cyber Security, Web Developer, HTML, CSS, JavaScript, Python, Portfolio">
+  <meta name="author" content="Shraoshi Basak">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://shraoshi-2006.github.io/portfolio/">
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shraoshi Basak | Cyber Security Student & Web Developer">
+  <meta property="og:description" content="Portfolio of Shraoshi Basak, a Cyber Security student and Web Developer showcasing projects, skills and experience.">
+  <meta property="og:image" content="og-preview.png">
+  <meta property="og:url" content="https://shraoshi-2006.github.io/portfolio/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shraoshi Basak | Cyber Security Student & Web Developer">
+  <meta name="twitter:description" content="Portfolio of Shraoshi Basak, a Cyber Security student and Web Developer.">
+  <meta name="twitter:image" content="og-preview.png">
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shraoshi Basak",
+    "jobTitle": "Cyber Security Student & Web Developer",
+    "url": "https://shraoshi-2006.github.io/portfolio/",
+    "sameAs": [
+      "https://github.com/shraoshi-2006",
+      "https://www.linkedin.com/in/shraoshi-basak-93200a327/",
+      "https://www.instagram.com/its_me_shraoxi/"
+    ]
+  }
+  </script>
+
+  <!-- External Fonts & Libraries -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="logo">
-        <img src="logo_circle_small.png" alt="Shraoshi Basak"> 
-      </div>
 
-      <nav class="nav-menu">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+  <!-- Custom Cursor System (DevHQ style) -->
+  <div class="cursor-dot" data-cursor-dot></div>
+  <div class="cursor-outline" data-cursor-outline></div>
 
-      <div class="header-controls">
-         <!-- Theme toggle button -->
-            <button id="theme-toggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
-        
-        <div class="toggle">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
+  <!-- 3D Starfield Background Canvas -->
+  <div class="background-container">
+    <canvas id="bg-canvas"></canvas>
+  </div>
+
+<!-- Skip Navigation Link -->
+<a href="#main-content" class="skip-link">Skip to Content</a>
+
+<!-- Header Section -->
+<header role="banner">
+  <div class="container">
+
+    <!-- Website Logo -->
+    <div class="logo">
+      <img src="logo_circle_small.png" alt="Shraoshi Basak logo" width="50" height="50">
     </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="heroSection" id="home">
+    <!-- Main Navigation -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Main">
+      <ul>
+        <li><a href="#home" aria-current="page">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Controls -->
+    <div class="header-controls">
+
+      <!-- Dark Mode Toggle -->
+      <button id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+      </button>
+
+      <!-- Mobile Menu Button -->
+      <button type="button"
+              class="toggle"
+              id="nav-toggle"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+              aria-controls="nav-menu">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+
+    </div>
+
+  </div>
+</header>
+
+
+<!-- Main Content -->
+<main id="main-content">
+
+<!-- Hero Section -->
+<section class="heroSection"
+         id="home"
+         aria-labelledby="hero-title">
+
   <div class="hero-content">
 
-    <h1 class="hero-title">
-      Myself <span>Shraoshi Basak</span>
+    <h1 id="hero-title" class="hero-title">
+      Myself
+      <span>Shraoshi Basak</span>
     </h1>
 
-    <h2 class="hero-subtitle">Cyber Security Student & Web Developer</h2>
+    <p class="hero-subtitle">
+      Cyber Security Student &amp; Web Developer
+    </p>
 
     <div class="hero-buttons">
-      <a href="#projects" class="hero-btn hero-btn-primary">View Projects</a>
-      <a href="Resume_.pdf" class="hero-btn hero-btn-secondary">Download Resume</a>
+      <a href="#projects" class="hero-btn hero-btn-primary">
+        View Projects
+      </a>
+
+      <a href="Resume_.pdf"
+         class="hero-btn hero-btn-secondary"
+         download>
+        Download Resume
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll to explore</span>
+
+    <div class="mouse">
+      <div class="wheel"></div>
     </div>
   </div>
-  <div class="scroll-indicator">
-  <span>Scroll to explore</span>
-  <div class="mouse">
-    <div class="wheel"></div>
-  </div>
-</div>
+
 </section>
 
 
-<!--About Section -->
-  <section id="about">
-  <h2 class="section-title">About Me</h2>
+<!-- About Section -->
+<section id="about"
+         aria-labelledby="about-title">
+
+  <h2 id="about-title" class="section-title">
+    About Me
+  </h2>
 
   <div class="about-content">
 
-    <!-- LEFT : TEXT + EDUCATION -->
+    <!-- About Text -->
     <div class="about-text">
 
       <p>
-        I'm currently pursuing <strong>B.Sc. in Cyber Security</strong> at
+        I'm currently pursuing
+        <strong>B.Sc. in Cyber Security</strong>
+        at
         <strong>Guru Nanak Institute of Technology</strong>.
-        I enjoy building secure and user-friendly web applications.
+        Cybersecurity undergraduate with a strong interest in web development and information security, supported by hands-on experience
+in building practical frontend and security-focused projects. Committed to continuously expanding technical knowledge, solving real
+world challenges, and adapting to emerging technologies. Seeking an internship or entry-level opportunity to contribute to a
+collaborative team, gain industry experience, and grow as a web developer.
       </p>
 
-      <!-- EDUCATION (inside About, no new section) -->
+      <!-- Education Timeline -->
       <div class="education">
-        <ul class="timeline">
-  <li class="timeline-item">
-    <span class="year">2024–2028</span>
-    <p>B.Sc Cyber Security - Guru Nanak Institute of Technology, MAKAUT</p>
-  </li>
+        <h3 id="education-title">Education</h3>
+        <ul class="timeline" aria-labelledby="education-title">
 
-  <li class="timeline-item">
-    <span class="year">2024</span>
-    <p>Higher Secondary - Uttarpara Girls' High School (UGHS), WBCHSE</p>
-  </li>
+          <li class="timeline-item">
+            <span class="year">2024–2028</span>
+            <p>B.Sc Cyber Security &ndash; Guru Nanak Institute of Technology, MAKAUT</p>
+          </li>
 
-  <li class="timeline-item">
-    <span class="year">2022</span>
-    <p>Secondary - Uttarpara Childrens' Own Home (UCOH), WBBSE</p>
-  </li>
-</ul>
+          <li class="timeline-item">
+            <span class="year">2024</span>
+            <p>Higher Secondary &ndash; Uttarpara Girls' High School (UGHS), WBCHSE</p>
+          </li>
+
+          <li class="timeline-item">
+            <span class="year">2022</span>
+            <p>Secondary &ndash; Uttarpara Childrens' Own Home (UCOH), WBBSE</p>
+          </li>
+
+        </ul>
       </div>
+
     </div>
 
-    <!-- RIGHT : IMAGE -->
+    <!-- Profile Image -->
     <div class="about-image">
-      <img src="shraoshi.jpg.jpeg" alt="Shraoshi Basak">
+      <img src="shraoshi.jpg.jpeg"
+           alt="Portrait of Shraoshi Basak, Cyber Security student and Web Developer"
+           width="300" height="300">
     </div>
 
   </div>
+
 </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="skillsSection">
-    <h2 class="section-title">Technical Skills</h2>
+<!-- Skills Section -->
+<section id="skills"
+         class="skillsSection"
+         aria-labelledby="skills-title">
 
-    <div class="skills-container">
-      <div class="skill-card">
-        <h3>Frontend Development</h3>
-        <ul>
-          <li><i class="fab fa-html5"></i> HTML5</li>
-          <li><i class="fab fa-css3-alt"></i> CSS3</li>
-          <li><i class="fab fa-js"></i> JavaScript</li>
-        </ul>
-      </div>
+  <h2 id="skills-title" class="section-title">
+    Technical Skills
+  </h2>
 
-      <div class="skill-card">
-        <h3>Programming Languages</h3>
-        <ul>
-          <li><i class="fab fa-python"></i> Python</li>
-          <li><i class="fas fa-code"></i> C</li>
-          <li><i class="fas fa-code"></i> C++</li>
-          <li><i class="fab fa-java"></i> Java</li>
-        </ul>
-      </div>
+  <div class="skills-container">
+
+    <!-- Frontend Skills -->
+    <div class="skill-card">
+
+      <h3 id="frontend-skills-title">Frontend Development</h3>
+
+      <ul aria-labelledby="frontend-skills-title">
+        <li>
+          <i class="fab fa-html5" aria-hidden="true"></i>
+          HTML5
+        </li>
+
+        <li>
+          <i class="fab fa-css3-alt" aria-hidden="true"></i>
+          CSS3
+        </li>
+
+        <li>
+          <i class="fab fa-js" aria-hidden="true"></i>
+          JavaScript
+        </li>
+      </ul>
+
     </div>
 
-    <div class="soft-skills">
-      <h3>Soft Skills</h3>
-      <div class="soft-skills-container">
-        <span>💬 Communication</span>
-        <span>🤝 Teamwork</span>
-        <span>⏳ Time Management</span>
-        <span>🧩 Problem Solving</span>
-        <span>🚀 Self-Motivated</span>
-      </div>
-    </div>
-  </section>
 
-  <section id="projects">
-  <h2>Projects</h2>
+    <!-- Programming Skills -->
+    <div class="skill-card">
+
+      <h3 id="prog-skills-title">Programming Languages</h3>
+
+      <ul aria-labelledby="prog-skills-title">
+        <li>
+          <i class="fab fa-python" aria-hidden="true"></i>
+          Python
+        </li>
+
+        <li>
+          <i class="fas fa-code" aria-hidden="true"></i>
+          C
+        </li>
+
+        <li>
+          <i class="fas fa-code" aria-hidden="true"></i>
+          C++
+        </li>
+
+        <li>
+          <i class="fab fa-java" aria-hidden="true"></i>
+          Java
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <!-- Soft Skills -->
+  <div class="soft-skills">
+
+    <h3 id="soft-skills-title">Soft Skills</h3>
+
+    <div class="soft-skills-container" aria-labelledby="soft-skills-title">
+      <span><span aria-hidden="true">💬</span> Communication</span>
+      <span><span aria-hidden="true">🤝</span> Teamwork</span>
+      <span><span aria-hidden="true">⏳</span> Time Management</span>
+      <span><span aria-hidden="true">🧩</span> Problem Solving</span>
+      <span><span aria-hidden="true">🚀</span> Self-Motivated</span>
+    </div>
+
+  </div>
+
+</section>
+
+
 <!-- Projects Section -->
-  <div class="project-card">
-    <h3>🔐 Password Strength Checker</h3>
+<section id="projects"
+         aria-labelledby="projects-title">
+
+  <h2 id="projects-title" class="section-title">
+    Projects
+  </h2>
+
+  <article class="project-card">
+
+    <h3>
+      <span aria-hidden="true">🔐</span> Password Strength Checker
+    </h3>
 
     <p>
       A web-based password strength analyzer that evaluates passwords in real time
       based on length, character diversity, and security best practices.
     </p>
 
-    <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
+    <p>
+      <strong>Tech Stack:</strong>
+      HTML, CSS, JavaScript
+    </p>
 
     <div class="project-links">
-      <a href="https://password-checker-delta-three.vercel.app/" target="_blank">Live Demo</a>
-      <a href="https://github.com/shraoshi-2006/password_checker" target="_blank">GitHub</a>
+
+      <a href="https://password-checker-delta-three.vercel.app/"
+         target="_blank"
+         rel="noopener noreferrer">
+        Live Demo <span class="visually-hidden">of Password Strength Checker (opens in new tab)</span>
+      </a>
+
+      <a href="https://github.com/shraoshi-2006/password_checker"
+         target="_blank"
+         rel="noopener noreferrer">
+        GitHub <span class="visually-hidden">repository for Password Strength Checker (opens in new tab)</span>
+      </a>
+
     </div>
-  </div>
+
+  </article>
+
 </section>
 
-  <!-- Work Experience Section -->
-  <section id="experience" class="experienceSection">
-  <h2 class="section-title">Work Experience</h2>
+
+<!-- Experience Section -->
+<section id="experience"
+         class="experienceSection"
+         aria-labelledby="experience-title">
+
+  <h2 id="experience-title" class="section-title">
+    Work Experience
+  </h2>
 
   <div class="experience-container">
-    <div class="experience-card">
+
+    <article class="experience-card">
+
       <h3>Cyber Security Intern</h3>
-      <p>Worked on penetration testing, vulnerability assessment and security analysis.</p>
-    </div>
 
-    <div class="experience-card">
+      <p>
+        Worked on penetration testing, vulnerability assessment and security analysis.
+      </p>
+
+    </article>
+
+
+    <article class="experience-card">
+
       <h3>Web Developer</h3>
-      <p>Built responsive and accessible websites using HTML, CSS and JavaScript.</p>
-    </div>
 
-    <div class="experience-card">
+      <p>
+        Built responsive and accessible websites using HTML, CSS and JavaScript.
+      </p>
+
+    </article>
+
+
+    <article class="experience-card">
+
       <h3>Python Programmer</h3>
-      <p>Developed automation scripts and backend logic using Python.</p>
-    </div>
 
-    <div class="experience-card">
-      <h3>C & C++ Programmer</h3>
-      <p>Implemented data structures, algorithms and problem-solving projects.</p>
-    </div>
+      <p>
+        Developed automation scripts and backend logic using Python.
+      </p>
+
+    </article>
+
+
+    <article class="experience-card">
+
+      <h3>C &amp; C++ Programmer</h3>
+
+      <p>
+        Implemented data structures, algorithms and problem-solving projects.
+      </p>
+
+    </article>
+
   </div>
+
 </section>
 
 
 <!-- Contact Section -->
-<section id="contact">
-  <h2 class="section-title">Reach Out</h2>
+<section id="contact"
+         aria-labelledby="contact-title">
 
-  <div class="contact-container">
+  <h2 id="contact-title" class="section-title">
+    Reach Out
+  </h2>
 
-    <!-- MESSAGE FORM -->
+<div class="contact-container">
+    <!-- Contact Form -->
     <div class="contact-form-wrapper">
-      <form id="contact-form" class="contact-form">
 
-  <input
-    type="text"
-    name="from_name"
-    placeholder="Name"
-    required
-  >
+      <form id="contact-form"
+            class="contact-form"
+            aria-labelledby="contact-title">
 
-  <input
-    type="email"
-    name="from_email"
-    placeholder="Email"
-    required
-  >
+        <div role="status" aria-live="polite" class="visually-hidden" id="form-status"></div>
 
-  <textarea
-    name="message"
-    placeholder="Drop a line"
-    required
-  ></textarea>
+        <label for="name">
+          Name
+        </label>
 
-  <button type="submit">SEND MESSAGE</button>
-
-</form>
+        <input type="text"
+               id="name"
+               name="from_name"
+               placeholder="Name"
+               autocomplete="name"
+               required>
 
 
-<script>
-  (function () {
-    emailjs.init("ZSyUTeaB8bz8sFtX4");
-  })();
+        <label for="email">
+          Email
+        </label>
 
-  window.onload = function () {
-    document
-      .getElementById("contact-form")
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
+        <input type="email"
+               id="email"
+               name="from_email"
+               placeholder="Email"
+               autocomplete="email"
+               required>
 
-        emailjs.sendForm(
-          "service_ommgjzi",
-          "template_715eyqi",
-          this
-        ).then(
-          function () {
-            alert("Message sent successfully ✅");
-          },
-          function (error) {
-            alert("FAILED ❌ " + error.text);
-          }
-        );
-      });
-  };
-</script>
+
+        <label for="message">
+          Message
+        </label>
+
+        <textarea id="message"
+                  name="message"
+                  placeholder="Drop a line"
+                  required></textarea>
+
+
+        <button type="submit">
+          Send Message
+        </button>
+
+      </form>
 
     </div>
 
-    <!-- CONTACT DETAILS -->
-    <div class="contact-info-wrapper">
-  <h3>Contact Details</h3>
+    <!-- Contact Information -->
+    <aside class="contact-info-wrapper" aria-label="Contact details and social links">
 
-  <div class="contact-item">
-    <span class="contact-icon">📍</span>
-    <span>49, Rajendra Avenue, Uttarpara, Hooghly, 712258</span>
-  </div>
+      <h3>
+        Contact Details
+      </h3>
 
-  <div class="contact-item">
-    <span class="contact-icon">📞</span>
-    <span>+91 91635 60254</span>
-  </div>
+      <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">📍</span>
+          <span>49, Rajendra Avenue, Uttarpara, Hooghly, 712258</span>
+        </li>
 
-  <div class="contact-item">
-    <span class="contact-icon">✉️</span>
-    <span>shraoshi.2006@gmail.com</span>
-  </div>
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">📞</span>
+          <span><a href="tel:+919163560254">+91 91635 60254</a></span>
+        </li>
 
-  <!-- 🔽 SOCIAL ICONS (EMAIL ER NICHE) -->
-  <div class="contact-socials">
-    <a href="https://github.com/shraoshi-2006" target="_blank" class="contact-card"> 
-      <div class="icon-circle"><i class="fab fa-github"></i></div> <h3>GitHub</h3>
-    </a>
-    <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" target="_blank" class="contact-card">
-      <div class="icon-circle"><i class="fab fa-linkedin-in"></i></div> <h3>LinkedIn</h3>
-    </a>
-    <a href="https://www.instagram.com/its_me_shraoxi/" target="_blank" class="contact-card">
-      <div class="icon-circle"><i class="fab fa-instagram"></i></div> <h3>Instagram</h3>
-    </a>
-  </div>
+        <li class="contact-item">
+          <span class="contact-icon" aria-hidden="true">✉️</span>
+          <span><a href="mailto:shraoshi.2006@gmail.com">shraoshi.2006@gmail.com</a></span>
+        </li>
+      </ul>
+
+      <!-- Social Media Links -->
+      <div class="contact-socials">
+
+        <a href="https://github.com/shraoshi-2006"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="contact-card"
+           aria-label="Shraoshi's GitHub profile (opens in new tab)">
+
+          <span class="icon-circle">
+            <i class="fab fa-github" aria-hidden="true"></i>
+          </span>
+
+          <span>GitHub</span>
+
+        </a>
+
+
+        <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="contact-card"
+           aria-label="Shraoshi's LinkedIn profile (opens in new tab)">
+
+          <span class="icon-circle">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          </span>
+
+          <span>LinkedIn</span>
+
+        </a>
+
+
+        <a href="https://www.instagram.com/its_me_shraoxi/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="contact-card"
+           aria-label="Shraoshi's Instagram profile (opens in new tab)">
+
+          <span class="icon-circle">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </span>
+
+          <span>Instagram</span>
+
+        </a>
+      </div>
+    </aside>
 </div>
 </section>
+</main>
 
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2024 Shraoshi Basak. All rights reserved.</p>
-    </div>
-  </footer>
+<!-- Footer Section -->
+<footer role="contentinfo">
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" id="scrollToTop">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+  <div class="container">
 
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-  <script src="script.js"></script>
-</body>
+    <p>
+      &copy; 2024 Shraoshi Basak. All rights reserved.
+    </p>
+
+  </div>
+
+</footer>
+
+
+<!-- Scroll To Top Button -->
+<button class="scroll-to-top"
+        type="button"
+        id="scrollToTop"
+        aria-label="Scroll to top">
+
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+
+</button>
+
+
+<!-- 3D Background Engine (Three.js) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="3d_background.js"></script>
+
+<!-- External JavaScript Libraries -->
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+<!-- EmailJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Main JavaScript (theme toggle, nav toggle, scroll-to-top) -->
+<script src="script.js"></script>
+
+
+<!-- EmailJS Contact Form -->
 <script>
-  document.getElementById("contact-form").addEventListener("submit", function (e) {
-    e.preventDefault();
 
-    emailjs.sendForm(
-      "service_ommgjzi",
-      "template_715eyqi",
-      this
-    ).then(
-      function () {
-        alert("Message sent successfully!");
-        document.getElementById("contact-form").reset();
-      },
-      function (error) {
-        alert("Failed to send message 😢");
-        console.log(error);
-      }
-    );
+(function () {
+
+  emailjs.init({
+    publicKey: "ZSyUTeaB8bz8sFtX4"
   });
+
+})();
+
+
+document.getElementById("contact-form")
+.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  var status = document.getElementById("form-status");
+
+  emailjs.sendForm(
+    "service_ommgjzi",
+    "template_715eyqi",
+    this
+  )
+  .then(function() {
+
+    status.textContent = "Message sent successfully.";
+
+    document.getElementById("contact-form").reset();
+
+  }, function(error) {
+
+    status.textContent = "Failed to send message. Please try again.";
+
+    console.log(error);
+
+  });
+
+});
+
 </script>
+
+
+</body>
+
 </html>
