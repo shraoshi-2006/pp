@@ -1,19 +1,18 @@
 // ======================================================
-// THEME TOGGLE
+// THEME SYSTEM & STATE MANAGEMENT
 // ======================================================
 
 (function () {
+  'use strict';
+
   const toggleBtn = document.getElementById("theme-toggle");
   const root = document.documentElement;
 
-  if (!toggleBtn) {
-    console.warn("Theme toggle button not found");
-    return;
-  }
+  if (!toggleBtn) return;
 
   const icon = toggleBtn.querySelector("i");
 
-  // Load saved theme or default dark for space aesthetic
+  // Load saved theme or default dark for space/glass aesthetic
   const savedTheme = localStorage.getItem("theme") || "dark";
   root.setAttribute("data-theme", savedTheme);
   updateIcon(savedTheme);
@@ -36,65 +35,173 @@
 
 
 // ======================================================
-// CUSTOM CURSOR SYSTEM (DevHQ style)
+// NEXT-GEN CYBER GLASS CURSOR SYSTEM
+// Butter-smooth requestAnimationFrame lerp, magnetic glass
+// expansion on interactables, click pulse, and edge fading.
 // ======================================================
 
 (function () {
+  'use strict';
+
+  // Check if device is touch or coarse pointer
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    return;
+  }
+
   const cursorDot = document.querySelector('[data-cursor-dot]');
-  const cursorOutline = document.querySelector('[data-cursor-outline]');
+  const cursorRing = document.querySelector('[data-cursor-ring]');
+  const cursorGlow = document.querySelector('[data-cursor-glow]');
 
-  if (!cursorDot || !cursorOutline) return;
+  if (!cursorDot || !cursorRing) return;
 
-  // Track mouse coordinates
-  window.addEventListener('mousemove', function (e) {
-    const posX = e.clientX;
-    const posY = e.clientY;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
+  let glowX = mouseX;
+  let glowY = mouseY;
+  let isHovered = false;
+  let isVisible = false;
 
-    cursorDot.style.left = `${posX}px`;
-    cursorDot.style.top = `${posY}px`;
+  // Track raw mouse position
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-    cursorOutline.animate(
-      {
-        left: `${posX}px`,
-        top: `${posY}px`
-      },
-      { duration: 500, fill: "forwards" }
-    );
+    if (!isVisible) {
+      isVisible = true;
+      cursorDot.classList.add('active');
+      cursorRing.classList.add('active');
+      if (cursorGlow) cursorGlow.classList.add('active');
+    }
+
+    // Instant position for the precision core dot
+    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  // Smooth lerp render loop for outer ring & glow aura
+  function renderCursor() {
+    // Lerp outer ring
+    ringX += (mouseX - ringX) * 0.2;
+    ringY += (mouseY - ringY) * 0.2;
+
+    const ringScale = isHovered ? 'scale(1.5)' : 'scale(1)';
+    cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${ringScale}`;
+
+    // Lerp soft glow aura with gentler lag
+    if (cursorGlow) {
+      glowX += (mouseX - glowX) * 0.12;
+      glowY += (mouseY - glowY) * 0.12;
+      const glowScale = isHovered ? 'scale(1.8)' : 'scale(1)';
+      cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%) ${glowScale}`;
+    }
+
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+
+  // Mouse Down / Up click animation
+  window.addEventListener('mousedown', () => {
+    cursorRing.classList.add('clicking');
   });
 
-  // Magnetic / Expand Hover Effect for interactables
-  function initCursorHover() {
+  window.addEventListener('mouseup', () => {
+    cursorRing.classList.remove('clicking');
+  });
+
+  // Window edge fading
+  document.addEventListener('mouseleave', () => {
+    isVisible = false;
+    cursorDot.classList.remove('active');
+    cursorRing.classList.remove('active');
+    if (cursorGlow) cursorGlow.classList.remove('active');
+  });
+
+  document.addEventListener('mouseenter', () => {
+    isVisible = true;
+    cursorDot.classList.add('active');
+    cursorRing.classList.add('active');
+    if (cursorGlow) cursorGlow.classList.add('active');
+  });
+
+  // Magnetic & Frosted Glass Hover on Interactive Elements
+  function bindInteractiveHovers() {
     const interactables = document.querySelectorAll(
-      'a, button, input, textarea, select, .logo, .hero-btn, .project-card, .timeline-item, .contact-card, #theme-toggle, #nav-toggle, #scrollToTop'
+      'a, button, input, textarea, select, label, .logo, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #theme-toggle, #nav-toggle, #scrollToTop'
     );
 
     interactables.forEach((el) => {
       el.addEventListener('mouseenter', () => {
-        cursorOutline.classList.add('hovered');
+        isHovered = true;
+        cursorRing.classList.add('hovered');
+        if (cursorGlow) cursorGlow.classList.add('hovered');
       });
+
       el.addEventListener('mouseleave', () => {
-        cursorOutline.classList.remove('hovered');
+        isHovered = false;
+        cursorRing.classList.remove('hovered');
+        if (cursorGlow) cursorGlow.classList.remove('hovered');
       });
     });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCursorHover);
+    document.addEventListener('DOMContentLoaded', bindInteractiveHovers);
   } else {
-    initCursorHover();
+    bindInteractiveHovers();
   }
 })();
 
 
 // ======================================================
-// NAVIGATION & SCROLL CONTROLS
+// NAVIGATION & DYNAMIC GLASS HEADER SCROLL EFFECT
 // ======================================================
 
 (function () {
-  // Mobile Nav Toggle
+  'use strict';
+
+  const header = document.querySelector('header');
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('nav-menu');
+  const scrollToTop = document.getElementById('scrollToTop');
 
+  // Glass Header Scroll Reactivity
+  function handleScroll() {
+    const scrollY = window.scrollY;
+
+    // Header frosted compression
+    if (header) {
+      if (scrollY > 30) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+
+    // Scroll to Top Button Visibility
+    if (scrollToTop) {
+      if (scrollY > 350) {
+        scrollToTop.classList.add('visible');
+      } else {
+        scrollToTop.classList.remove('visible');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Initial check
+
+  // Scroll to Top Smooth Click
+  if (scrollToTop) {
+    scrollToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // Mobile Nav Toggle
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
       const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
@@ -102,30 +209,11 @@
       navMenu.classList.toggle('active');
     });
 
-    // Close menu when clicking link
+    // Close mobile menu on link click
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  // Scroll to Top Button
-  const scrollToTop = document.getElementById('scrollToTop');
-  if (scrollToTop) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 350) {
-        scrollToTop.classList.add('visible');
-      } else {
-        scrollToTop.classList.remove('visible');
-      }
-    });
-
-    scrollToTop.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
       });
     });
   }

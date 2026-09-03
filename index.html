@@ -54,12 +54,16 @@
 
 <body>
 
-  <!-- Custom Cursor System (DevHQ style) -->
-  <div class="cursor-dot" data-cursor-dot></div>
-  <div class="cursor-outline" data-cursor-outline></div>
+  <!-- Futuristic Glass Cursor System -->
+  <div class="cursor-glow" data-cursor-glow aria-hidden="true"></div>
+  <div class="cursor-ring" data-cursor-ring aria-hidden="true"></div>
+  <div class="cursor-dot" data-cursor-dot aria-hidden="true"></div>
 
-  <!-- 3D Starfield Background Canvas -->
-  <div class="background-container">
+  <!-- Cosmic Background System with Ambient Aurora Glows -->
+  <div class="background-container" aria-hidden="true">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
     <canvas id="bg-canvas"></canvas>
   </div>
 
@@ -543,17 +547,45 @@ collaborative team, gain industry experience, and grow as a web developer.
 </main>
 
 
-<!-- Footer Section -->
-<footer role="contentinfo">
+<!-- Liquid Glass Footer Section -->
+<footer role="contentinfo" class="glass-footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="logo_circle_small.png" alt="Shraoshi Basak logo" width="40" height="40">
+        <span class="footer-title">Shraoshi Basak</span>
+      </div>
+      <p class="footer-tagline">Cyber Security Student &amp; Web Developer</p>
+    </div>
 
-  <div class="container">
+    <div class="footer-links">
+      <a href="#home" class="footer-link">Home</a>
+      <a href="#about" class="footer-link">About</a>
+      <a href="#skills" class="footer-link">Skills</a>
+      <a href="#projects" class="footer-link">Projects</a>
+      <a href="#experience" class="footer-link">Experience</a>
+      <a href="#contact" class="footer-link">Contact</a>
+    </div>
 
-    <p>
-      &copy; 2024 Shraoshi Basak. All rights reserved.
-    </p>
-
+    <div class="footer-socials">
+      <a href="https://github.com/shraoshi-2006" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="GitHub profile">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="LinkedIn profile">
+        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.instagram.com/its_me_shraoxi/" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="Instagram profile">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:shraoshi.2006@gmail.com" class="social-pill" aria-label="Send Email">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+      </a>
+    </div>
   </div>
 
+  <div class="footer-bottom">
+    <p>&copy; 2026 Shraoshi Basak. Crafted with passion &amp; cybersecurity in mind.</p>
+  </div>
 </footer>
 
 
