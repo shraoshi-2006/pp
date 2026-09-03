@@ -1,36 +1,13 @@
 // ======================================================
-// THEME SYSTEM & STATE MANAGEMENT
+// PORTFOLIO CORE JAVASCRIPT
+// Cyber Glass Cursor, Navigation, and Header Reactivity
 // ======================================================
 
 (function () {
   'use strict';
 
-  const toggleBtn = document.getElementById("theme-toggle");
-  const root = document.documentElement;
-
-  if (!toggleBtn) return;
-
-  const icon = toggleBtn.querySelector("i");
-
-  // Load saved theme or default dark for space/glass aesthetic
-  const savedTheme = localStorage.getItem("theme") || "dark";
-  root.setAttribute("data-theme", savedTheme);
-  updateIcon(savedTheme);
-
-  // Toggle on click
-  toggleBtn.addEventListener("click", () => {
-    const currentTheme = root.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-
-    root.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateIcon(newTheme);
-  });
-
-  function updateIcon(theme) {
-    if (!icon) return;
-    icon.className = theme === "dark" ? "fas fa-moon" : "fas fa-sun";
-  }
+  // Ensure dark cosmic aesthetic is active by default
+  document.documentElement.setAttribute('data-theme', 'dark');
 })();
 
 
@@ -127,7 +104,7 @@
   // Magnetic & Frosted Glass Hover on Interactive Elements
   function bindInteractiveHovers() {
     const interactables = document.querySelectorAll(
-      'a, button, input, textarea, select, label, .logo, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #theme-toggle, #nav-toggle, #scrollToTop'
+      'a, button, input, textarea, select, label, .logo, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #nav-toggle, #scrollToTop'
     );
 
     interactables.forEach((el) => {
@@ -201,20 +178,55 @@
     });
   }
 
-  // Mobile Nav Toggle
+  // Mobile Nav Toggle & Responsive Menu Interaction
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
+    const toggleIcon = navToggle.querySelector('i');
+
+    function closeMenu() {
+      navMenu.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+      if (toggleIcon) {
+        toggleIcon.className = 'fas fa-bars';
+      }
+    }
+
+    function openMenu() {
+      navMenu.classList.add('active');
+      navToggle.setAttribute('aria-expanded', 'true');
+      if (toggleIcon) {
+        toggleIcon.className = 'fas fa-times';
+      }
+    }
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!isExpanded));
-      navMenu.classList.toggle('active');
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
-    // Close mobile menu on link click
+    // Close mobile menu when clicking any nav link
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
+        closeMenu();
       });
+    });
+
+    // Close mobile menu when clicking anywhere outside
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close mobile menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        closeMenu();
+      }
     });
   }
 })();

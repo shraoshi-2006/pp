@@ -485,44 +485,31 @@ header.scrolled {
   gap: 15px;
 }
 
-/* Theme toggle button styling and hover affordance */
-#theme-toggle {
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-left: 1rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1200; 
-}
-
-#theme-toggle:hover {
-    transform: rotate(15deg) scale(1.1);
-    color: var(--primary);
-    background: rgba(139, 92, 246, 0.1);
-}
-
-/* Toggle button */
+/* Mobile Hamburger Toggle Button (Hidden on Desktop) */
 .toggle {
-  display: none;
+  display: none !important;
   cursor: pointer;
-  color: white;
-  font-size: 24px;
-  z-index: 1001;
-  background: rgba(255, 255, 255, 0.1);
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  display: flex;
+  color: #ffffff;
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+  z-index: 1200;
+}
+
+.toggle:hover,
+.toggle:active {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+  color: #00f2fe;
 }
 
 /* ================= HERO SECTION ONLY ================= */
@@ -1360,32 +1347,77 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
+  header {
+    overflow: visible !important;
+  }
+
   .toggle {
-    display: flex;
+    display: flex !important;
   }
 
   .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: rgba(75, 46, 131, 0.95);
-    transition: right 0.3s ease;
-    padding-top: 80px;
-    z-index: 1000;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 6, 24, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 2px solid rgba(168, 85, 247, 0.35);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.25s ease,
+                visibility 0.25s ease,
+                padding 0.35s ease;
+    z-index: 9999;
   }
 
   .nav-menu.active {
-    right: 0;
+    max-height: 440px;
+    opacity: 1;
+    visibility: visible;
+    padding: 16px 0 22px;
   }
 
   .nav-menu ul {
+    display: flex;
     flex-direction: column;
-    gap: 25px;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu ul li {
+    width: 85%;
     text-align: center;
-    padding: 0 20px;
+  }
+
+  .nav-menu ul li a {
+    display: block;
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 1.05rem;
+    color: #ffffff;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+  }
+
+  .nav-menu ul li a:hover,
+  .nav-menu ul li a:active {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.5);
+    color: #00f2fe;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+    transform: translateY(-2px);
   }
   
   .firstSection {
@@ -1574,10 +1606,6 @@ footer a:hover {
     width: 80%;
     justify-content: center;
   }
-  
-  .nav-menu {
-    width: 85%;
-  }
 }
 
 
@@ -1632,13 +1660,6 @@ footer a:hover {
 .education span {
   font-size: 0.95rem;
   opacity: 0.8;
-}
-
-.theme-toggle {
-  cursor: pointer;
-  pointer-events: auto;
-  z-index: 9999;
-  position: relative;
 }
 
 .dark-mode {
