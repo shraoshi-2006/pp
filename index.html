@@ -189,8 +189,8 @@
         </button>
 
         <!-- Direct Gmail Reach-Out Button (Right-most) -->
-        <a href="mailto:shraoshibasak.9090@gmail.com" class="header-gmail-btn" aria-label="Contact Shraoshi Basak via Gmail"
-          title="Reach out directly: shraoshibasak.9090@gmail.com">
+        <a href="mailto:shraoshibasak.9090@gmail.com" class="header-gmail-btn" id="header-mail-btn" aria-label="Contact Shraoshi Basak via Gmail"
+          title="Click to compose an email to Shraoshi Basak">
           <i class="fas fa-envelope" aria-hidden="true"></i>
         </a>
       </div>
@@ -821,6 +821,78 @@
 
   </script>
 
+  <!-- Interactive Animated Email Dialogue Modal -->
+  <div class="email-modal-overlay" id="email-modal-overlay" aria-hidden="true">
+    <div class="email-dialog-box" role="dialog" aria-modal="true" aria-labelledby="email-dialog-title">
+      
+      <!-- Dialog Header Bar -->
+      <div class="email-dialog-header">
+        <div class="email-window-controls">
+          <span class="window-dot dot-red" aria-hidden="true"></span>
+          <span class="window-dot dot-yellow" aria-hidden="true"></span>
+          <span class="window-dot dot-green" aria-hidden="true"></span>
+        </div>
+        <div class="email-dialog-title-wrap">
+          <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+          <span id="email-dialog-title">Compose Message</span>
+        </div>
+        <button type="button" class="email-dialog-close-btn" id="email-dialog-close" aria-label="Close dialog">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Dialog Body / Email Form -->
+      <form class="email-dialog-form" id="email-dialog-form">
+        
+        <!-- "To" Field (Locked with verified recipient badge) -->
+        <div class="email-field-row">
+          <label for="email-modal-to-display" class="email-field-label">To:</label>
+          <div class="email-recipient-chip" id="email-modal-to-display">
+            <img src="SB-logo.svg" alt="SB" class="recipient-avatar">
+            <span class="recipient-name">Shraoshi Basak</span>
+            <span class="recipient-address">&lt;shraoshibasak.9090@gmail.com&gt;</span>
+          </div>
+          <input type="hidden" id="email-modal-to" name="to_email" value="shraoshibasak.9090@gmail.com">
+        </div>
+
+        <!-- "From" Field -->
+        <div class="email-field-row">
+          <label for="email-modal-from" class="email-field-label">From:</label>
+          <input type="email" id="email-modal-from" name="user_email" class="email-field-input" placeholder="your.name@example.com" required autocomplete="email">
+        </div>
+
+        <!-- "Subject" Field -->
+        <div class="email-field-row">
+          <label for="email-modal-subject" class="email-field-label">Subject:</label>
+          <input type="text" id="email-modal-subject" name="subject" class="email-field-input" placeholder="Project inquiry / Collaboration / Cyber Security" required>
+        </div>
+
+        <!-- "Message" Body Field -->
+        <div class="email-message-row">
+          <textarea id="email-modal-message" name="message" class="email-field-textarea" rows="5" placeholder="Hi Shraoshi, I would love to connect with you regarding..." required></textarea>
+        </div>
+
+        <!-- Status Message Feedback -->
+        <div class="email-dialog-status" id="email-dialog-status" aria-live="polite"></div>
+
+        <!-- Dialog Footer Actions -->
+        <div class="email-dialog-footer">
+          <div class="dialog-footer-left">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shraoshibasak.9090@gmail.com" target="_blank" rel="noopener noreferrer" class="email-gmail-shortcut-btn" id="email-gmail-shortcut" title="Open compose directly in Gmail web app">
+              <i class="fab fa-google" aria-hidden="true"></i> Open in Gmail
+            </a>
+          </div>
+          <div class="dialog-footer-right">
+            <button type="button" class="email-modal-cancel-btn" id="email-modal-cancel">Discard</button>
+            <button type="submit" class="email-modal-submit-btn" id="email-modal-submit">
+              <span>Send</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
 
 </body>
 
