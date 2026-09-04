@@ -719,43 +719,9 @@ header.scrolled {
   display: block;
 }
 
-.logo-brand-info {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.logo-name {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.logo-role {
-  font-size: 0.68rem;
-  font-family: 'JetBrains Mono', monospace;
-  color: #00f2fe;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
 .logo-link:hover .logo-avatar-frame {
   transform: scale(1.1) rotate(6deg);
   box-shadow: 0 0 22px rgba(168, 85, 247, 0.7);
-}
-
-.logo-link:hover .logo-name {
-  color: #00f2fe;
-  text-shadow: 0 0 12px rgba(0, 242, 254, 0.6);
-}
-
-[data-theme="light"] .logo-name {
-  color: #1a1a2e;
-}
-[data-theme="light"] .logo-link:hover .logo-name {
-  color: #5b4bd6;
 }
 
 /* Navigation Menu & Floating Glass Pills */
@@ -793,7 +759,7 @@ header.scrolled {
   border-color: rgba(91, 75, 214, 0.25);
 }
 
-/* Header Controls & Reach Out Gmail Button */
+/* Header Controls & Reach Out Gmail Icon Button */
 .header-controls {
   display: flex;
   align-items: center;
@@ -803,42 +769,37 @@ header.scrolled {
 .header-gmail-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 20px;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   background: rgba(234, 67, 53, 0.12);
   border: 1px solid rgba(234, 67, 53, 0.45);
   color: #ffffff;
-  font-size: 0.88rem;
-  font-weight: 600;
+  font-size: 1.15rem;
   text-decoration: none;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: 0 0 14px rgba(234, 67, 53, 0.2);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
 }
 
 .header-gmail-btn i {
   color: #ff5e52;
-  font-size: 1rem;
+  font-size: 1.15rem;
   transition: transform 0.3s ease;
-}
-
-.header-gmail-btn .gmail-btn-text {
-  letter-spacing: 0.3px;
 }
 
 .header-gmail-btn:hover {
   background: rgba(234, 67, 53, 0.25);
   border-color: #ff5e52;
   box-shadow: 0 0 22px rgba(234, 67, 53, 0.55), 0 0 30px rgba(168, 85, 247, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.08);
   color: #ffffff;
 }
 
 .header-gmail-btn:hover i {
-  transform: scale(1.15) rotate(-6deg);
+  transform: scale(1.15) rotate(-8deg);
 }
 
 [data-theme="light"] .header-gmail-btn {
@@ -1337,53 +1298,70 @@ color: #ffffff;
   margin: 0;
 }
 
-.skills-pill-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Individual Skill Cards Sub-Grid */
+.skills-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 14px;
+}
+
+.skill-item-card {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.skill-pill {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 10px;
-  padding: 9px 15px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 18px 10px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
 }
 
-.skill-pill i {
-  font-size: 1.25rem;
-  display: inline-flex;
+.skill-item-card i {
+  font-size: 2.2rem;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  height: 40px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.skill-pill:hover {
+.skill-item-card .skill-name {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-color);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.skill-item-card:hover {
   background: rgba(168, 85, 247, 0.18);
   border-color: rgba(0, 242, 254, 0.5);
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), 0 0 12px rgba(0, 242, 254, 0.25);
-  color: #ffffff;
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45), 0 0 16px rgba(0, 242, 254, 0.3);
 }
 
-[data-theme="light"] .skill-pill {
-  background: rgba(91, 75, 214, 0.06);
-  border-color: rgba(91, 75, 214, 0.15);
+.skill-item-card:hover i {
+  transform: scale(1.15) rotate(4deg);
+}
+
+[data-theme="light"] .skill-item-card {
+  background: rgba(91, 75, 214, 0.05);
+  border-color: rgba(91, 75, 214, 0.14);
   color: #1a1a2e;
+  box-shadow: 0 4px 12px rgba(91, 75, 214, 0.08);
 }
 
-[data-theme="light"] .skill-pill:hover {
-  background: rgba(91, 75, 214, 0.14);
+[data-theme="light"] .skill-item-card:hover {
+  background: rgba(91, 75, 214, 0.12);
   border-color: rgba(91, 75, 214, 0.4);
-  color: #5b4bd6;
+  box-shadow: 0 10px 24px rgba(91, 75, 214, 0.18);
 }
 
 /* ================= PROJECTS SECTION ================= */

@@ -182,7 +182,7 @@
   // Magnetic & Frosted Glass Hover on Interactive Elements
   function bindInteractiveHovers() {
     const interactables = document.querySelectorAll(
-      'a, button, input, textarea, select, label, .logo-link, .header-gmail-btn, .skill-pill, .skill-category-card, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #nav-toggle, #scrollToTop'
+      'a, button, input, textarea, select, label, .logo-link, .header-gmail-btn, .skill-item-card, .skill-category-card, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #nav-toggle, #scrollToTop'
     );
 
     interactables.forEach((el) => {
