@@ -308,3 +308,111 @@
     });
   }
 })();
+
+
+// ======================================================
+// TECHNICAL SKILLS — STRUCTURED DATA & COMPONENT ENGINE
+// Reusable data-driven architecture for skills categories and chips
+// ======================================================
+
+const TECHNICAL_SKILLS_DATA = [
+  {
+    id: 'frontend',
+    index: '01',
+    category: 'FRONTEND',
+    countText: '6 Technologies',
+    accent: '#38bdf8',
+    glow: 'rgba(56, 189, 248, 0.25)',
+    iconClass: 'fas fa-layer-group',
+    gridClass: 'card-frontend',
+    technologies: [
+      { name: 'React', icon: '<i class="devicon-react-original colored" aria-hidden="true"></i>' },
+      { name: 'JavaScript', icon: '<i class="devicon-javascript-plain colored" aria-hidden="true"></i>' },
+      { name: 'TypeScript', icon: '<i class="devicon-typescript-plain colored" aria-hidden="true"></i>' },
+      { name: 'HTML5', icon: '<i class="devicon-html5-plain colored" aria-hidden="true"></i>' },
+      { name: 'CSS3', icon: '<i class="devicon-css3-plain colored" aria-hidden="true"></i>' },
+      { name: 'Tailwind CSS', icon: '<i class="devicon-tailwindcss-original colored" aria-hidden="true"></i>' }
+    ]
+  },
+  {
+    id: 'backend',
+    index: '02',
+    category: 'BACKEND',
+    countText: '4 Technologies',
+    accent: '#34d399',
+    glow: 'rgba(52, 211, 153, 0.25)',
+    iconClass: 'fas fa-server',
+    gridClass: 'card-backend',
+    technologies: [
+      { name: 'Node.js', icon: '<i class="devicon-nodejs-plain colored" aria-hidden="true"></i>' },
+      { name: 'REST APIs', icon: '<i class="fas fa-network-wired" style="color: #34d399;" aria-hidden="true"></i>' },
+      { name: 'dotenv', icon: '<i class="fas fa-sliders" style="color: #6ee7b7;" aria-hidden="true"></i>' },
+      { name: 'JWT', icon: '<i class="fas fa-key" style="color: #fbbf24;" aria-hidden="true"></i>' }
+    ]
+  },
+  {
+    id: 'database',
+    index: '04',
+    category: 'DATABASE',
+    countText: '3 Technologies',
+    accent: '#818cf8',
+    glow: 'rgba(129, 140, 248, 0.25)',
+    iconClass: 'fas fa-database',
+    gridClass: 'card-database',
+    technologies: [
+      { name: 'PostgreSQL', icon: '<i class="devicon-postgresql-plain colored" aria-hidden="true"></i>' },
+      { name: 'SQLite', icon: '<i class="devicon-sqlite-plain colored" aria-hidden="true"></i>' },
+      { name: 'SQL', icon: '<i class="fas fa-table-columns" style="color: #818cf8;" aria-hidden="true"></i>' }
+    ]
+  },
+  {
+    id: 'devops',
+    index: '03',
+    category: 'DEV & DEPLOYMENT',
+    countText: '6 Technologies',
+    accent: '#c084fc',
+    glow: 'rgba(192, 132, 252, 0.25)',
+    iconClass: 'fas fa-cloud-arrow-up',
+    gridClass: 'card-devops',
+    technologies: [
+      { name: 'Git', icon: '<i class="devicon-git-plain colored" aria-hidden="true"></i>' },
+      { name: 'GitHub', icon: '<i class="devicon-github-original" aria-hidden="true"></i>' },
+      { name: 'Vercel', icon: '<i class="devicon-vercel-original" aria-hidden="true"></i>' },
+      { name: 'Render', icon: '<i class="fas fa-cloud" style="color: #46e3b7;" aria-hidden="true"></i>' },
+      { name: 'npm', icon: '<i class="devicon-npm-original-wordmark colored" aria-hidden="true"></i>' },
+      { name: 'VS Code', icon: '<i class="devicon-vscode-plain colored" aria-hidden="true"></i>' }
+    ]
+  },
+  {
+    id: 'automation',
+    index: '05',
+    category: 'AUTOMATION & INTEGRATION',
+    countText: '1 Technology',
+    accent: '#f43f5e',
+    glow: 'rgba(244, 63, 94, 0.25)',
+    iconClass: 'fas fa-plug-circle-bolt',
+    gridClass: 'card-automation',
+    technologies: [
+      { name: 'APIs', icon: '<i class="fas fa-bolt" style="color: #f43f5e;" aria-hidden="true"></i>' }
+    ]
+  }
+];
+
+// Interactive Constellation & Skill Chips enhancement
+(function initTechnicalSkillsComponent() {
+  const bentoGrid = document.getElementById('skills-bento-grid');
+  if (!bentoGrid) return;
+
+  // Add subtle interactive spotlight coordinate tracking for each card
+  const cards = bentoGrid.querySelectorAll('.bento-skill-card');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mouse-x', `${x}%`);
+      card.style.setProperty('--mouse-y', `${y}%`);
+    });
+  });
+})();
+
