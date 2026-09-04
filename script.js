@@ -421,7 +421,7 @@ const TECHNICAL_SKILLS_DATA = [
 // INTERACTIVE CYBER EMAIL DIALOGUE MODAL ENGINE
 // ======================================================
 
-(function initEmailDialogueModal() {
+function initEmailDialogueModal() {
   const mailBtn = document.getElementById('header-mail-btn');
   const overlay = document.getElementById('email-modal-overlay');
   const closeBtn = document.getElementById('email-dialog-close');
@@ -434,137 +434,163 @@ const TECHNICAL_SKILLS_DATA = [
   const submitBtn = document.getElementById('email-modal-submit');
   const gmailShortcut = document.getElementById('email-gmail-shortcut');
 
-  if (!mailBtn || !overlay || !form) return;
-
-  function updateGmailShortcut() {
-    if (!gmailShortcut || !subjectInput || !fromInput || !messageInput) return;
-    const recipient = 'shraoshibasak.9090@gmail.com';
-    const sub = encodeURIComponent(subjectInput.value.trim());
-    const body = encodeURIComponent(
-      `From: ${fromInput.value.trim()}\n\n${messageInput.value.trim()}`
-    );
-    gmailShortcut.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${sub}&body=${body}`;
-  }
-
-  [fromInput, subjectInput, messageInput].forEach((input) => {
-    if (input) input.addEventListener('input', updateGmailShortcut);
-  });
-
-  function openModal(e) {
-    if (e) e.preventDefault();
-    overlay.classList.add('active');
-    overlay.setAttribute('aria-hidden', 'false');
+  window.openEmailModal = function (e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const ov = document.getElementById('email-modal-overlay');
+    if (!ov) return;
+    ov.classList.add('active');
+    ov.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     updateGmailShortcut();
     setTimeout(() => {
-      if (fromInput) fromInput.focus();
+      const fi = document.getElementById('email-modal-from');
+      if (fi) fi.focus();
     }, 150);
-  }
+  };
 
-  function closeModal() {
-    overlay.classList.remove('active');
-    overlay.setAttribute('aria-hidden', 'true');
+  window.closeEmailModal = function () {
+    const ov = document.getElementById('email-modal-overlay');
+    if (!ov) return;
+    ov.classList.remove('active');
+    ov.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    if (statusEl) {
-      statusEl.textContent = '';
-      statusEl.className = 'email-dialog-status';
+    const st = document.getElementById('email-dialog-status');
+    if (st) {
+      st.textContent = '';
+      st.className = 'email-dialog-status';
     }
+  };
+
+  function updateGmailShortcut() {
+    const gs = document.getElementById('email-gmail-shortcut');
+    const subIn = document.getElementById('email-modal-subject');
+    const fromIn = document.getElementById('email-modal-from');
+    const msgIn = document.getElementById('email-modal-message');
+    if (!gs || !subIn || !fromIn || !msgIn) return;
+    const recipient = 'shraoshibasak.9090@gmail.com';
+    const sub = encodeURIComponent(subIn.value.trim());
+    const body = encodeURIComponent(
+      `From: ${fromIn.value.trim()}\n\n${msgIn.value.trim()}`
+    );
+    gs.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${sub}&body=${body}`;
   }
 
-  mailBtn.addEventListener('click', openModal);
+  if (fromInput) fromInput.addEventListener('input', updateGmailShortcut);
+  if (subjectInput) subjectInput.addEventListener('input', updateGmailShortcut);
+  if (messageInput) messageInput.addEventListener('input', updateGmailShortcut);
 
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+  if (mailBtn) {
+    mailBtn.addEventListener('click', window.openEmailModal);
+  }
 
-  // Close on backdrop click (outside dialog box)
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      closeModal();
-    }
-  });
+  if (closeBtn) closeBtn.addEventListener('click', window.closeEmailModal);
+  if (cancelBtn) cancelBtn.addEventListener('click', window.closeEmailModal);
 
-  // Close on Escape key
+  if (overlay) {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        window.closeEmailModal();
+      }
+    });
+  }
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('active')) {
-      closeModal();
+    if (e.key === 'Escape') {
+      const ov = document.getElementById('email-modal-overlay');
+      if (ov && ov.classList.contains('active')) {
+        window.closeEmailModal();
+      }
     }
   });
 
-  // Form submission handler
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    const sender = fromInput.value.trim();
-    const subject = subjectInput.value.trim();
-    const message = messageInput.value.trim();
+      const fi = document.getElementById('email-modal-from');
+      const si = document.getElementById('email-modal-subject');
+      const mi = document.getElementById('email-modal-message');
+      const st = document.getElementById('email-dialog-status');
+      const sb = document.getElementById('email-modal-submit');
 
-    if (!sender || !subject || !message) {
-      if (statusEl) {
-        statusEl.textContent = 'Please fill out all fields.';
-        statusEl.className = 'email-dialog-status error';
+      const sender = fi ? fi.value.trim() : '';
+      const subject = si ? si.value.trim() : '';
+      const message = mi ? mi.value.trim() : '';
+
+      if (!sender || !subject || !message) {
+        if (st) {
+          st.textContent = 'Please fill out all fields.';
+          st.className = 'email-dialog-status error';
+        }
+        return;
       }
-      return;
-    }
 
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>';
-    }
-
-    if (statusEl) {
-      statusEl.textContent = 'Preparing secure dispatch...';
-      statusEl.className = 'email-dialog-status';
-    }
-
-    // Attempt dispatch via EmailJS if loaded, with fallback to mailto
-    if (typeof emailjs !== 'undefined' && emailjs.send) {
-      const templateParams = {
-        from_email: sender,
-        to_email: 'shraoshibasak.9090@gmail.com',
-        subject: subject,
-        message: message,
-        reply_to: sender
-      };
-
-      emailjs.send('service_ommgjzi', 'template_715eyqi', templateParams)
-        .then(function () {
-          if (statusEl) {
-            statusEl.textContent = 'Message delivered successfully! Thank you.';
-            statusEl.className = 'email-dialog-status success';
-          }
-          form.reset();
-          setTimeout(closeModal, 1600);
-        })
-        .catch(function (error) {
-          console.warn('EmailJS dispatch failed, falling back to mail client:', error);
-          const mailtoUrl = `mailto:shraoshibasak.9090@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + sender + '\n\n' + message)}`;
-          window.location.href = mailtoUrl;
-          if (statusEl) {
-            statusEl.textContent = 'Opening your mail client...';
-            statusEl.className = 'email-dialog-status success';
-          }
-          setTimeout(closeModal, 1600);
-        })
-        .finally(function () {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span>Send</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
-          }
-        });
-    } else {
-      const mailtoUrl = `mailto:shraoshibasak.9090@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + sender + '\n\n' + message)}`;
-      window.location.href = mailtoUrl;
-      if (statusEl) {
-        statusEl.textContent = 'Opening your mail client...';
-        statusEl.className = 'email-dialog-status success';
+      if (sb) {
+        sb.disabled = true;
+        sb.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>';
       }
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Send</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
+
+      if (st) {
+        st.textContent = 'Preparing secure dispatch...';
+        st.className = 'email-dialog-status';
       }
-      setTimeout(closeModal, 1600);
-    }
-  });
-})();
+
+      // Attempt dispatch via EmailJS if loaded, with fallback to mailto
+      if (typeof emailjs !== 'undefined' && emailjs.send) {
+        const templateParams = {
+          from_email: sender,
+          to_email: 'shraoshibasak.9090@gmail.com',
+          subject: subject,
+          message: message,
+          reply_to: sender
+        };
+
+        emailjs.send('service_ommgjzi', 'template_715eyqi', templateParams)
+          .then(function () {
+            if (st) {
+              st.textContent = 'Message delivered successfully! Thank you.';
+              st.className = 'email-dialog-status success';
+            }
+            form.reset();
+            setTimeout(window.closeEmailModal, 1600);
+          })
+          .catch(function (error) {
+            console.warn('EmailJS dispatch failed, falling back to mail client:', error);
+            const mailtoUrl = `mailto:shraoshibasak.9090@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + sender + '\n\n' + message)}`;
+            window.location.href = mailtoUrl;
+            if (st) {
+              st.textContent = 'Opening your mail client...';
+              st.className = 'email-dialog-status success';
+            }
+            setTimeout(window.closeEmailModal, 1600);
+          })
+          .finally(function () {
+            if (sb) {
+              sb.disabled = false;
+              sb.innerHTML = '<span>Send</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
+            }
+          });
+      } else {
+        const mailtoUrl = `mailto:shraoshibasak.9090@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + sender + '\n\n' + message)}`;
+        window.location.href = mailtoUrl;
+        if (st) {
+          st.textContent = 'Opening your mail client...';
+          st.className = 'email-dialog-status success';
+        }
+        if (sb) {
+          sb.disabled = false;
+          sb.innerHTML = '<span>Send</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
+        }
+        setTimeout(window.closeEmailModal, 1600);
+      }
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEmailDialogueModal);
+} else {
+  initEmailDialogueModal();
+}
 
 

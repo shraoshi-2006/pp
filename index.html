@@ -102,7 +102,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
   <!-- Main CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.1">
 </head>
 
 <body>
@@ -189,7 +189,7 @@
         </button>
 
         <!-- Direct Gmail Reach-Out Button (Right-most) -->
-        <a href="mailto:shraoshibasak.9090@gmail.com" class="header-gmail-btn" id="header-mail-btn" aria-label="Contact Shraoshi Basak via Gmail"
+        <a href="mailto:shraoshibasak.9090@gmail.com" class="header-gmail-btn" id="header-mail-btn" onclick="if(window.openEmailModal){window.openEmailModal(event); return false;}" aria-label="Contact Shraoshi Basak via Gmail"
           title="Click to compose an email to Shraoshi Basak">
           <i class="fas fa-envelope" aria-hidden="true"></i>
         </a>
@@ -765,62 +765,6 @@
   </button>
 
 
-  <!-- 3D Background Engine (Three.js) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="3d_background.js"></script>
-
-  <!-- External JavaScript Libraries -->
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-
-  <!-- EmailJS Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-  <!-- Main JavaScript (theme toggle, nav toggle, scroll-to-top) -->
-  <script src="script.js"></script>
-
-
-  <!-- EmailJS Contact Form -->
-  <script>
-
-    (function () {
-
-      emailjs.init({
-        publicKey: "ZSyUTeaB8bz8sFtX4"
-      });
-
-    })();
-
-
-    document.getElementById("contact-form")
-      .addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        var status = document.getElementById("form-status");
-
-        emailjs.sendForm(
-          "service_ommgjzi",
-          "template_715eyqi",
-          this
-        )
-          .then(function () {
-
-            status.textContent = "Message sent successfully.";
-
-            document.getElementById("contact-form").reset();
-
-          }, function (error) {
-
-            status.textContent = "Failed to send message. Please try again.";
-
-            console.log(error);
-
-          });
-
-      });
-
-  </script>
-
   <!-- Interactive Animated Email Dialogue Modal -->
   <div class="email-modal-overlay" id="email-modal-overlay" aria-hidden="true">
     <div class="email-dialog-box" role="dialog" aria-modal="true" aria-labelledby="email-dialog-title">
@@ -836,7 +780,7 @@
           <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
           <span id="email-dialog-title">Compose Message</span>
         </div>
-        <button type="button" class="email-dialog-close-btn" id="email-dialog-close" aria-label="Close dialog">
+        <button type="button" class="email-dialog-close-btn" id="email-dialog-close" onclick="if(window.closeEmailModal) window.closeEmailModal();" aria-label="Close dialog">
           <i class="fas fa-times" aria-hidden="true"></i>
         </button>
       </div>
@@ -883,7 +827,7 @@
             </a>
           </div>
           <div class="dialog-footer-right">
-            <button type="button" class="email-modal-cancel-btn" id="email-modal-cancel">Discard</button>
+            <button type="button" class="email-modal-cancel-btn" id="email-modal-cancel" onclick="if(window.closeEmailModal) window.closeEmailModal();">Discard</button>
             <button type="submit" class="email-modal-submit-btn" id="email-modal-submit">
               <span>Send</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>
             </button>
@@ -893,6 +837,84 @@
       </form>
     </div>
   </div>
+
+  <!-- Immediate Inline Modal Controller -->
+  <script>
+    window.openEmailModal = function(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      var m = document.getElementById('email-modal-overlay');
+      if (m) {
+        m.classList.add('active');
+        m.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        var f = document.getElementById('email-modal-from');
+        if (f) setTimeout(function() { f.focus(); }, 150);
+      }
+    };
+    window.closeEmailModal = function() {
+      var m = document.getElementById('email-modal-overlay');
+      if (m) {
+        m.classList.remove('active');
+        m.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    };
+  </script>
+  <!-- 3D Background Engine (Three.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="3d_background.js"></script>
+
+  <!-- External JavaScript Libraries -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <!-- EmailJS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Main JavaScript (theme toggle, nav toggle, scroll-to-top) -->
+  <script src="script.js?v=2.1"></script>
+
+
+  <!-- EmailJS Contact Form -->
+  <script>
+
+    (function () {
+
+      emailjs.init({
+        publicKey: "ZSyUTeaB8bz8sFtX4"
+      });
+
+    })();
+
+
+    document.getElementById("contact-form")
+      .addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        var status = document.getElementById("form-status");
+
+        emailjs.sendForm(
+          "service_ommgjzi",
+          "template_715eyqi",
+          this
+        )
+          .then(function () {
+
+            status.textContent = "Message sent successfully.";
+
+            document.getElementById("contact-form").reset();
+
+          }, function (error) {
+
+            status.textContent = "Failed to send message. Please try again.";
+
+            console.log(error);
+
+          });
+
+      });
+
+  </script>
 
 </body>
 

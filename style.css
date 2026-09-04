@@ -2081,8 +2081,10 @@ footer a:hover {
   }
 
   .header-gmail-btn {
-    padding: 6px 10px;
-    font-size: 0.8rem;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    font-size: 1rem;
   }
   
   .firstSection {
@@ -2146,15 +2148,6 @@ footer a:hover {
 }
 
 @media (max-width: 480px) {
-  .header-gmail-btn .gmail-btn-text {
-    display: none;
-  }
-
-  .header-gmail-btn {
-    padding: 8px 10px;
-    border-radius: 50%;
-  }
-
   .logo-brand-info {
     display: none;
   }
