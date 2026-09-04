@@ -1,6 +1,6 @@
 // ======================================================
 // PORTFOLIO CORE JAVASCRIPT
-// Cyber Glass Cursor, Navigation, and Header Reactivity
+// Cyber Preloader, Custom Cursor, Navigation, and Reactivity
 // ======================================================
 
 (function () {
@@ -8,6 +8,84 @@
 
   // Ensure dark cosmic aesthetic is active by default
   document.documentElement.setAttribute('data-theme', 'dark');
+})();
+
+
+// ======================================================
+// 1 TO 100% FUTURISTIC CYBER PRELOADER ENGINE
+// High-tech telemetry logs, numeric ticker, and cyber reveal
+// ======================================================
+
+(function () {
+  'use strict';
+
+  const preloader = document.getElementById('preloader');
+  const counterEl = document.getElementById('preloader-counter');
+  const barEl = document.getElementById('preloader-bar');
+  const statusEl = document.getElementById('preloader-status');
+
+  if (!preloader || !counterEl || !barEl || !statusEl) return;
+
+  document.body.classList.add('loading');
+
+  const telemetryMessages = [
+    { threshold: 0, text: '[SYS_BOOT] INITIALIZING QUANTUM PROTOCOLS...' },
+    { threshold: 24, text: '[SEC_CHK] COMPILING CYBER RESILIENCE CORE...' },
+    { threshold: 52, text: '[DEV_ENG] SYNCHRONIZING 3D & TECH STACK...' },
+    { threshold: 76, text: '[INTERFACE] DECRYPTING PORTFOLIO DATASTREAM...' },
+    { threshold: 94, text: '[READY] ACCESS AUTHORIZED. PREPARING VIEWPORT...' },
+    { threshold: 100, text: '[COMPLETE] ACCESS GRANTED. WELCOME, VISITOR.' }
+  ];
+
+  let currentCount = 1;
+  const targetCount = 100;
+  const totalDuration = 1800; // 1.8 seconds total
+  const startTime = performance.now();
+
+  function updateTelemetry(val) {
+    for (let i = telemetryMessages.length - 1; i >= 0; i--) {
+      if (val >= telemetryMessages[i].threshold) {
+        statusEl.textContent = telemetryMessages[i].text;
+        break;
+      }
+    }
+  }
+
+  function tickPreloader(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / totalDuration, 1);
+    
+    // Smooth easing curve (easeOutCubic)
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const calculatedCount = Math.min(Math.floor(1 + (targetCount - 1) * eased), 100);
+
+    if (calculatedCount > currentCount) {
+      currentCount = calculatedCount;
+      counterEl.textContent = currentCount;
+      barEl.style.width = currentCount + '%';
+      updateTelemetry(currentCount);
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(tickPreloader);
+    } else {
+      // Reached 100%
+      counterEl.textContent = '100';
+      barEl.style.width = '100%';
+      updateTelemetry(100);
+
+      setTimeout(() => {
+        preloader.classList.add('loaded');
+        document.body.classList.remove('loading');
+
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 800);
+      }, 350);
+    }
+  }
+
+  requestAnimationFrame(tickPreloader);
 })();
 
 
@@ -104,7 +182,7 @@
   // Magnetic & Frosted Glass Hover on Interactive Elements
   function bindInteractiveHovers() {
     const interactables = document.querySelectorAll(
-      'a, button, input, textarea, select, label, .logo, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #nav-toggle, #scrollToTop'
+      'a, button, input, textarea, select, label, .logo-link, .header-gmail-btn, .skill-pill, .skill-category-card, .hero-btn, .project-card, .timeline-item, .contact-card, .social-pill, .footer-link, #nav-toggle, #scrollToTop'
     );
 
     interactables.forEach((el) => {
