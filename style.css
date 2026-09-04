@@ -147,6 +147,7 @@
   padding: 0;
   box-sizing: border-box;
   cursor: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 *:not(.cursor-dot):not(.cursor-ring):not(.cursor-glow) {
@@ -157,10 +158,14 @@ html {
   scroll-behavior: smooth;
 }
 
+body, button, input, textarea, select {
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
   background: var(--primary-bg);
   color: var(--text-color);
-  font-family: "Mozilla Headline", sans-serif;
+  font-family: 'Poppins', sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
@@ -310,7 +315,7 @@ body.loading {
 }
 
 .hud-emblem-text {
-  font-family: "Mozilla Headline", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
   font-size: 1.4rem;
   background: linear-gradient(135deg, #ffffff, #00f2fe, #a855f7);
@@ -324,7 +329,7 @@ body.loading {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 18px;
 }
 
@@ -382,7 +387,7 @@ body.loading {
 
 /* Telemetry Log */
 .preloader-status {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 500;
   color: #00f2fe;
@@ -1409,7 +1414,7 @@ color: #ffffff;
 }
 
 .cat-index {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--cat-accent);
@@ -1429,7 +1434,7 @@ color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.76rem;
   font-weight: 600;
   padding: 4px 10px;
@@ -2600,7 +2605,7 @@ footer a:hover {
 
 .email-field-label {
   width: 65px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   color: #38bdf8;
@@ -2636,7 +2641,7 @@ footer a:hover {
 .recipient-address {
   font-size: 0.8rem;
   color: #94a3b8;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Poppins', sans-serif;
 }
 
 .email-field-input {
