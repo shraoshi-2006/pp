@@ -854,18 +854,21 @@
         </div>
 
         <div class="contact-card-wrapper">
-          <div class="mail-client-card">
+          <div class="mail-client-card" id="mail-dialog-card">
+
+            <!-- Card Interactive Spotlight Glow -->
+            <div class="card-spotlight" aria-hidden="true"></div>
 
             <!-- Mail Client Header Bar -->
             <div class="mail-card-header">
-              <div class="mail-window-dots">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-green"></span>
+              <div class="mail-window-dots" title="Window Controls">
+                <span class="dot dot-red" aria-label="Close dot"></span>
+                <span class="dot dot-yellow" aria-label="Minimize dot"></span>
+                <span class="dot dot-green" aria-label="Expand dot"></span>
               </div>
               <div class="mail-header-title">
-                <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
-                <span>New Message</span>
+                <span class="live-dot" aria-hidden="true"></span>
+                <span class="title-text">New Message — Direct Inbox</span>
               </div>
               <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shraoshibasak.9090@gmail.com"
                 target="_blank" rel="noopener noreferrer" class="mail-gmail-btn" id="email-gmail-shortcut"
@@ -881,11 +884,15 @@
               <!-- "To" Field (Preset & Locked) -->
               <div class="mail-row">
                 <label for="email-modal-to-display" class="mail-label">To:</label>
-                <div class="mail-chip" id="email-modal-to-display">
-                  <img src="SB-logo.svg" onerror="this.onerror=null; this.src='SB-logo.png';" alt="SB"
-                    class="recipient-avatar">
+                <div class="mail-chip" id="email-modal-to-display" title="Direct inbox for Shraoshi Basak">
+                  <div class="chip-avatar-wrapper">
+                    <img src="SB-logo.svg" onerror="this.onerror=null; this.src='SB-logo.png';" alt="SB"
+                      class="recipient-avatar">
+                    <span class="avatar-online-dot" aria-hidden="true"></span>
+                  </div>
                   <span class="chip-name">Shraoshi Basak</span>
                   <span class="chip-email">&lt;shraoshibasak.9090@gmail.com&gt;</span>
+                  <span class="chip-status-badge">Direct</span>
                 </div>
                 <input type="hidden" id="email-modal-to" name="to_email" value="shraoshibasak.9090@gmail.com">
               </div>
@@ -893,21 +900,41 @@
               <!-- "From" Field -->
               <div class="mail-row">
                 <label for="email-modal-from" class="mail-label">From:</label>
-                <input type="email" id="email-modal-from" name="user_email" class="mail-input"
-                  placeholder="your.email@example.com" required autocomplete="email">
+                <div class="mail-input-wrap">
+                  <input type="email" id="email-modal-from" name="user_email" class="mail-input"
+                    placeholder="your.email@example.com" required autocomplete="email">
+                  <i class="fas fa-at input-icon" aria-hidden="true"></i>
+                </div>
+              </div>
+
+              <!-- Quick Topic Chips -->
+              <div class="mail-topics-row">
+                <span class="topics-label">Quick Topic:</span>
+                <div class="topics-pills">
+                  <button type="button" class="topic-pill" data-topic="💼 Internship Opportunity">💼 Internship</button>
+                  <button type="button" class="topic-pill" data-topic="🚀 Project Collaboration">🚀 Collaboration</button>
+                  <button type="button" class="topic-pill" data-topic="🛡️ Security Discussion">🛡️ Security</button>
+                  <button type="button" class="topic-pill" data-topic="👋 Say Hello / General Inquiry">👋 Just Saying Hi</button>
+                </div>
               </div>
 
               <!-- "Subject" Field -->
               <div class="mail-row">
                 <label for="email-modal-subject" class="mail-label">Subject:</label>
-                <input type="text" id="email-modal-subject" name="subject" class="mail-input"
-                  placeholder="Internship Opportunity / Project Collaboration / Inquiry" required>
+                <div class="mail-input-wrap">
+                  <input type="text" id="email-modal-subject" name="subject" class="mail-input"
+                    placeholder="Internship Opportunity / Project Collaboration / Inquiry" required>
+                  <i class="fas fa-pen-nib input-icon" aria-hidden="true"></i>
+                </div>
               </div>
 
               <!-- "Message" Field -->
               <div class="mail-row message-row">
-                <label for="email-modal-message" class="mail-label">Message:</label>
-                <textarea id="email-modal-message" name="message" class="mail-textarea" rows="5"
+                <div class="message-label-row">
+                  <label for="email-modal-message" class="mail-label">Message:</label>
+                  <span class="char-counter" id="message-char-counter">0 / 1000</span>
+                </div>
+                <textarea id="email-modal-message" name="message" class="mail-textarea" rows="5" maxlength="1000"
                   placeholder="Hi Shraoshi, I came across your portfolio and would love to connect about..."
                   required></textarea>
               </div>
@@ -919,7 +946,7 @@
               <div class="mail-card-footer">
                 <div class="mail-footer-meta">
                   <span class="meta-item"><i class="fas fa-location-dot" aria-hidden="true"></i> Kolkata, India</span>
-                  <span class="meta-item"><i class="fas fa-graduation-cap" aria-hidden="true"></i> GNIT MAKAUT</span>
+                  <span class="meta-item"><i class="fas fa-bolt" aria-hidden="true"></i> Fast Response</span>
                 </div>
 
                 <div class="mail-footer-buttons">

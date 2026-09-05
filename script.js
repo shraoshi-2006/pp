@@ -195,6 +195,47 @@
   if (messageInput) messageInput.addEventListener('input', updateGmailShortcut);
   updateGmailShortcut();
 
+  // Dynamic Spotlight Glow tracking across the dialogue box
+  const card = document.getElementById('mail-dialog-card');
+  if (card) {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    }, { passive: true });
+  }
+
+  // Quick Topic Pills Auto-Fill
+  const topicPills = document.querySelectorAll('.topic-pill');
+  topicPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      topicPills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+      const topic = pill.getAttribute('data-topic');
+      if (subjectInput && topic) {
+        subjectInput.value = topic;
+        updateGmailShortcut();
+        subjectInput.focus();
+      }
+    });
+  });
+
+  // Live Character Counter
+  const charCounter = document.getElementById('message-char-counter');
+  if (messageInput && charCounter) {
+    messageInput.addEventListener('input', () => {
+      const len = messageInput.value.length;
+      charCounter.textContent = `${len} / 1000`;
+      if (len > 900) {
+        charCounter.classList.add('near-limit');
+      } else {
+        charCounter.classList.remove('near-limit');
+      }
+    });
+  }
+
   if (closeBtn) closeBtn.addEventListener('click', window.closeEmailModal);
   if (cancelBtn) cancelBtn.addEventListener('click', window.closeEmailModal);
 
@@ -378,7 +419,7 @@
 
   // Attach hover state to all interactive elements
   function bindHoverTargets() {
-    const interactiveSelectors = 'a, button, input, textarea, select, label, .tag, .stat-card, .pillar-card, .project-card, .repo-item, .meta-pill';
+    const interactiveSelectors = 'a, button, input, textarea, select, label, .tag, .stat-card, .pillar-card, .project-card, .repo-item, .meta-pill, .topic-pill, .mail-window-dots, .mail-chip';
     const targets = document.querySelectorAll(interactiveSelectors);
 
     targets.forEach((el) => {
