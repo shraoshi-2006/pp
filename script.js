@@ -29,7 +29,7 @@
     { threshold: 25, text: '[SEC_CHK] COMPILING DEFENSIVE AUDIT CORE...' },
     { threshold: 55, text: '[DEV_ENG] SYNCHRONIZING FASTAPI & NEXT.JS STACK...' },
     { threshold: 80, text: '[INTERFACE] DECRYPTING PORTFOLIO WORKSTATION...' },
-    { threshold: 95, text: '[READY] SECURITY CONSOLE ONLINE. PREPARING VIEWPORT...' },
+    { threshold: 95, text: '[READY] SYSTEMS ONLINE. PREPARING VIEWPORT...' },
     { threshold: 100, text: '[COMPLETE] ACCESS AUTHORIZED. WELCOME, VISITOR.' }
   ];
 
@@ -287,131 +287,7 @@
 })();
 
 
-// ======================================================
-// 4. SIGNATURE FEATURE #1: INTERACTIVE SECURITY CONSOLE
-// ======================================================
-const CONSOLE_RESPONSES = {
-  whoami: `[IDENTITY]
-Name:       Shraoshi Basak (SHRAOXI)
-Role:       Cybersecurity Student & Full-Stack Developer
-Education:  B.Sc. Cyber Security (2024–2028), Guru Nanak Institute of Technology, MAKAUT
-Location:   Kolkata, West Bengal, India
-Status:     Actively building, learning defensive security, and open to opportunities.`,
 
-  focus: `[CORE FOCUS AREAS]
-1. Defensive Cybersecurity: Network service discovery, vulnerability scanning, and posture scoring.
-2. Secure Full-Stack Web: Modern Next.js 15, FastAPI, RESTful microservices, and token-based auth.
-3. Applied Intelligence: Digital forensics anomaly detection, RAG workflows, and automated triage.`,
-
-  building: `[ACTIVE WORKSTATION PIPELINE]
-1. ForenSight AI: AI-assisted investigation workstation for digital forensics artifact triage.
-2. NetSentinel v1.2: Expanding CVE mapping algorithms, report export formats, and alert webhooks.`,
-
-  stack: `[ENGINEERING TOOLKIT]
-- Frontend:   React, Next.js 15, TypeScript, JavaScript, HTML5, CSS3, Tailwind CSS
-- Backend:    FastAPI, Python 3.10+, Node.js, REST APIs, JWT, dotenv
-- Security:   Nmap, Socket Scanner, HTTP Security Headers (CSP/HSTS), CVE Intelligence
-- Databases:  PostgreSQL, SQLite, SQL Schema Design
-- DevOps:     Git, GitHub, Docker, Vercel, Render, npm, Linux/Bash`,
-
-  defense: `[DEFENSIVE PRINCIPLES]
-- Principle of Least Privilege (PoLP) across all access endpoints.
-- Defense-in-depth: Never rely on a single defensive barrier.
-- Strict input validation at boundary layers using explicit schemas (Pydantic / TypeScript).
-- Zero hardcoded credentials or unauthenticated telemetry exposure.`,
-
-  mission: `[MISSION STATEMENT]
-"Build practical, usable digital software and understand what happens behind the interface to make systems resilient against modern threats."`,
-
-  projects: `[FEATURED REPOSITORIES]
-- 01 NetSentinel: Autonomous network vulnerability scanner & posture score platform.
-- 02 Password Strength Checker: Real-time entropy and security analysis engine.
-- 03 Weather Dashboard: Async forecast application with REST API and LocalStorage.
-- 04 Study Buddy: Python automation assistant for academic workflows.
-- 05 To-Do Productivity App: Frontend task management application.`,
-
-  contact: `[REACH OUT]
-- Email:     shraoshibasak.9090@gmail.com
-- GitHub:    https://github.com/shraoshi-2006
-- LinkedIn:  https://www.linkedin.com/in/shraoshi-basak-93200a327/
-- Location:  Kolkata, West Bengal, India`,
-
-  help: `[AVAILABLE CONSOLE COMMANDS]
-  whoami     - Learn about Shraoshi's background & identity
-  focus      - View primary engineering and cyber specializations
-  building   - Check what she is currently building (ForenSight AI)
-  stack      - Display primary language, framework, and tool stack
-  defense    - Read her defensive cybersecurity engineering principles
-  projects   - Summary of flagship open-source repositories
-  mission    - Core engineering philosophy
-  contact    - Professional contact coordinates
-  clear      - Clear the console terminal screen`
-};
-
-window.runConsoleCommand = function (cmdName) {
-  const historyEl = document.getElementById('terminal-history');
-  const inputEl = document.getElementById('cli-input');
-  if (!historyEl) return;
-
-  const sanitizedCmd = (cmdName || '').trim().toLowerCase();
-
-  if (sanitizedCmd === 'clear') {
-    historyEl.innerHTML = '';
-    if (inputEl) inputEl.value = '';
-    return;
-  }
-
-  // Create prompt entry
-  const entry = document.createElement('div');
-  entry.className = 'cmd-history-entry';
-
-  const promptLine = document.createElement('div');
-  promptLine.className = 'cmd-prompt-line';
-  promptLine.innerHTML = `<span class="cli-prompt">visitor@shraoxi:~$</span> <span>${escapeHtml(sanitizedCmd)}</span>`;
-  entry.appendChild(promptLine);
-
-  const responseLine = document.createElement('div');
-  responseLine.className = 'cmd-response';
-
-  if (CONSOLE_RESPONSES[sanitizedCmd]) {
-    responseLine.textContent = CONSOLE_RESPONSES[sanitizedCmd];
-  } else if (sanitizedCmd === '') {
-    // empty prompt
-  } else {
-    responseLine.innerHTML = `<span style="color: var(--accent-rose);">Command not recognized: '${escapeHtml(sanitizedCmd)}'.</span> Type <strong style="color: var(--accent-cyan);">'help'</strong> to view available commands.`;
-  }
-
-  entry.appendChild(responseLine);
-  historyEl.appendChild(entry);
-
-  if (inputEl) inputEl.value = '';
-
-  // Auto-scroll to bottom of console
-  const consoleBody = document.getElementById('console-body');
-  if (consoleBody) {
-    consoleBody.scrollTop = consoleBody.scrollHeight;
-  }
-};
-
-window.handleConsoleSubmit = function (e) {
-  if (e) e.preventDefault();
-  const inputEl = document.getElementById('cli-input');
-  if (!inputEl) return;
-  const cmd = inputEl.value.trim();
-  window.runConsoleCommand(cmd);
-};
-
-function escapeHtml(str) {
-  return str.replace(/[&<>"']/g, function (m) {
-    return {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    }[m];
-  });
-}
 
 
 // ======================================================
