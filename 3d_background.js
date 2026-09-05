@@ -1,7 +1,7 @@
 // ======================================================
 // 3D COSMIC UNIVERSE BACKGROUND (Three.js)
 // Featuring multi-depth starfields, floating constellation geometry,
-// interactive mouse parallax, and adaptive theme responsiveness.
+// interactive mouse parallax, reduced-motion support, and visibility pausing.
 // ======================================================
 
 (function () {
@@ -13,6 +13,9 @@
       return;
     }
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+
     // 1. Scene & Camera Setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -22,11 +25,11 @@
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha: true,
-      antialias: true,
+      antialias: !isMobile,
       powerPreference: 'high-performance'
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
 
     // 3. Radial Star Texture Generator
     function createGlowStarTexture(innerColor, outerColor) {
@@ -59,8 +62,7 @@
     const starTextureGold = createGlowStarTexture('rgba(255, 209, 102, 1)', 'rgba(255, 107, 107, 0.3)');
 
     // 4. Multi-Layered Star Systems
-    // Layer A: Far Ambient Starfield
-    const farCount = 2000;
+    const farCount = isMobile ? 800 : 1600;
     const farGeo = new THREE.BufferGeometry();
     const farPos = new Float32Array(farCount * 3);
     for (let i = 0; i < farCount * 3; i += 3) {
@@ -79,16 +81,16 @@
     const farStars = new THREE.Points(farGeo, farMat);
     scene.add(farStars);
 
-    // Layer B: Mid-Range Colored Cosmic Particles
-    const midCount = 900;
+    // Mid-Range Colored Cosmic Particles
+    const midCount = isMobile ? 400 : 800;
     const midGeo = new THREE.BufferGeometry();
     const midPos = new Float32Array(midCount * 3);
     const midColors = new Float32Array(midCount * 3);
     const palette = [
-      new THREE.Color(0x00f2fe), // Electric Cyan
-      new THREE.Color(0xa855f7), // Neon Violet
-      new THREE.Color(0xffd166), // Celestial Gold
-      new THREE.Color(0xffffff)  // Pure White
+      new THREE.Color(0x00f2fe),
+      new THREE.Color(0xa855f7),
+      new THREE.Color(0xffd166),
+      new THREE.Color(0xffffff)
     ];
 
     for (let i = 0; i < midCount; i++) {
@@ -116,8 +118,8 @@
     const midStars = new THREE.Points(midGeo, midMat);
     scene.add(midStars);
 
-    // Layer C: Near Twinkling Cyber Stars
-    const nearCount = 120;
+    // Near Twinkling Cyber Stars
+    const nearCount = isMobile ? 60 : 100;
     const nearGeo = new THREE.BufferGeometry();
     const nearPos = new Float32Array(nearCount * 3);
     for (let i = 0; i < nearCount * 3; i += 3) {
@@ -127,7 +129,7 @@
     }
     nearGeo.setAttribute('position', new THREE.BufferAttribute(nearPos, 3));
     const nearMat = new THREE.PointsMaterial({
-      size: 0.55,
+      size: 0.52,
       map: starTextureViolet,
       transparent: true,
       opacity: 0.9,
@@ -136,52 +138,48 @@
     const nearStars = new THREE.Points(nearGeo, nearMat);
     scene.add(nearStars);
 
-    // 5. Floating Geometric Constellation Core (3D Wireframe Icosahedron & Node Lattice)
+    // 5. Floating Geometric Constellation Core
     const coreGroup = new THREE.Group();
 
-    // Outer Wireframe Icosahedron
-    const icoGeometry = new THREE.IcosahedronGeometry(7, 1);
+    const icoGeometry = new THREE.IcosahedronGeometry(6.5, 1);
     const icoWireframe = new THREE.WireframeGeometry(icoGeometry);
     const icoMaterial = new THREE.LineBasicMaterial({
       color: 0x904cf7,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.2,
       linewidth: 1
     });
     const icoLine = new THREE.LineSegments(icoWireframe, icoMaterial);
     coreGroup.add(icoLine);
 
-    // Inner Concentric Dodecahedron
-    const innerGeometry = new THREE.DodecahedronGeometry(4.2, 0);
+    const innerGeometry = new THREE.DodecahedronGeometry(4, 0);
     const innerWireframe = new THREE.WireframeGeometry(innerGeometry);
     const innerMaterial = new THREE.LineBasicMaterial({
       color: 0x00d4ff,
       transparent: true,
-      opacity: 0.28,
+      opacity: 0.26,
       linewidth: 1
     });
     const innerLine = new THREE.LineSegments(innerWireframe, innerMaterial);
     coreGroup.add(innerLine);
 
-    // Constellation Vertex Node Spheres
     const nodesGeometry = new THREE.BufferGeometry();
     const icoVertices = icoGeometry.attributes.position.array;
     nodesGeometry.setAttribute('position', new THREE.BufferAttribute(icoVertices, 3));
     const nodesMaterial = new THREE.PointsMaterial({
-      size: 0.35,
+      size: 0.32,
       map: starTextureGold,
       transparent: true,
-      opacity: 0.7,
+      opacity: 0.65,
       depthWrite: false
     });
     const nodesPoints = new THREE.Points(nodesGeometry, nodesMaterial);
     coreGroup.add(nodesPoints);
 
-    // Position Constellation Core in upper-right 3D space
-    coreGroup.position.set(16, 2, -10);
+    coreGroup.position.set(isMobile ? 0 : 15, isMobile ? 12 : 2, -10);
     scene.add(coreGroup);
 
-    // 6. Interactive Mouse Parallax Tracking
+    // 6. Interactive Mouse Parallax
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
@@ -190,79 +188,71 @@
     const windowHalfX = window.innerWidth / 2;
     const windowHalfY = window.innerHeight / 2;
 
-    window.addEventListener('mousemove', (event) => {
-      targetX = (event.clientX - windowHalfX) * 0.0004;
-      targetY = (event.clientY - windowHalfY) * 0.0004;
-    }, { passive: true });
-
-    // 7. Theme Adaptation System
-    function applyThemeToThree(theme) {
-      const isLight = theme === 'light';
-      farMat.opacity = isLight ? 0.35 : 0.75;
-      midMat.opacity = isLight ? 0.45 : 0.85;
-      nearMat.opacity = isLight ? 0.5 : 0.9;
-      icoMaterial.opacity = isLight ? 0.12 : 0.22;
-      innerMaterial.opacity = isLight ? 0.16 : 0.28;
-      nodesMaterial.opacity = isLight ? 0.4 : 0.7;
+    if (!isMobile) {
+      window.addEventListener('mousemove', (event) => {
+        targetX = (event.clientX - windowHalfX) * 0.0003;
+        targetY = (event.clientY - windowHalfY) * 0.0003;
+      }, { passive: true });
     }
 
-    // Observe data-theme changes on html
-    const themeObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-theme') {
-          const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-          applyThemeToThree(currentTheme);
-        }
-      });
-    });
-    themeObserver.observe(document.documentElement, { attributes: true });
-    applyThemeToThree(document.documentElement.getAttribute('data-theme') || 'dark');
-
-    // 8. Animation & Render Loop
+    // 7. Animation & Render Loop with Tab Visibility Pausing
     let clock = new THREE.Clock();
+    let isPageVisible = true;
+    let animFrameId = null;
+
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+      if (isPageVisible) {
+        clock.start();
+        animate();
+      } else if (animFrameId) {
+        cancelAnimationFrame(animFrameId);
+      }
+    });
 
     function animate() {
+      if (!isPageVisible) return;
+
       const elapsedTime = clock.getElapsedTime();
 
-      // Smooth interpolation for mouse parallax
-      mouseX += (targetX - mouseX) * 0.05;
-      mouseY += (targetY - mouseY) * 0.05;
+      if (!prefersReducedMotion) {
+        mouseX += (targetX - mouseX) * 0.05;
+        mouseY += (targetY - mouseY) * 0.05;
 
-      // Organic rotation for star layers
-      farStars.rotation.y += 0.0001;
-      farStars.rotation.x += 0.00005;
+        farStars.rotation.y += 0.00008;
+        farStars.rotation.x += 0.00004;
 
-      midStars.rotation.y += 0.0002;
-      midStars.rotation.x -= 0.0001;
+        midStars.rotation.y += 0.00015;
+        midStars.rotation.x -= 0.00008;
 
-      nearStars.rotation.y += 0.0003;
-      nearStars.rotation.x += 0.00015;
+        nearStars.rotation.y += 0.00025;
 
-      // Parallax mouse responsiveness
-      camera.position.x += (mouseX * 25 - camera.position.x) * 0.04;
-      camera.position.y += (-mouseY * 25 - camera.position.y) * 0.04;
-      camera.lookAt(scene.position);
+        camera.position.x += (mouseX * 20 - camera.position.x) * 0.03;
+        camera.position.y += (-mouseY * 20 - camera.position.y) * 0.03;
+        camera.lookAt(scene.position);
 
-      // Core constellation rotation & breathing pulse
-      coreGroup.rotation.x = elapsedTime * 0.12 + mouseY * 2;
-      coreGroup.rotation.y = elapsedTime * 0.18 + mouseX * 2;
-      coreGroup.rotation.z = Math.sin(elapsedTime * 0.2) * 0.15;
+        coreGroup.rotation.x = elapsedTime * 0.1 + mouseY * 1.5;
+        coreGroup.rotation.y = elapsedTime * 0.15 + mouseX * 1.5;
 
-      const pulse = 1 + Math.sin(elapsedTime * 0.8) * 0.04;
-      coreGroup.scale.set(pulse, pulse, pulse);
+        const pulse = 1 + Math.sin(elapsedTime * 0.7) * 0.03;
+        coreGroup.scale.set(pulse, pulse, pulse);
+      }
 
       renderer.render(scene, camera);
-      requestAnimationFrame(animate);
+      animFrameId = requestAnimationFrame(animate);
     }
 
     animate();
 
-    // 9. Resize Handling
+    // 8. Resize Handling
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, w < 768 ? 1.5 : 2));
+      coreGroup.position.set(w < 768 ? 0 : 15, w < 768 ? 12 : 2, -10);
     }, { passive: true });
   }
 
