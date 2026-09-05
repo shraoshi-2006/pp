@@ -190,7 +190,6 @@
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#defense">Defense</a></li>
           <li><a href="#certifications">Certs</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -839,102 +838,6 @@
 
 
 
-    <!-- ===================================================
-         8. SIGNATURE FEATURE #3: ATTACK → DEFENSE
-    =================================================== -->
-    <section id="defense" aria-labelledby="defense-heading">
-      <div class="container">
-
-        <div class="section-header">
-          <div class="section-tag">Cybersecurity Concepts</div>
-          <h2 id="defense-heading" class="section-title">Attack → Defense: Engineering in Depth</h2>
-          <p class="section-subtitle">
-            Defensive cybersecurity is about reducing attack surfaces. Here are three architectural examples of how vulnerabilities are neutralized in code.
-          </p>
-        </div>
-
-        <div class="attack-defense-grid">
-
-          <!-- Example 1: Auth & Credential Abuse -->
-          <div class="defense-module-card">
-            <div class="defense-card-header">
-              <span class="defense-badge"><i class="fas fa-key" aria-hidden="true"></i> Auth &amp; Sessions</span>
-              <span class="project-number">01</span>
-            </div>
-
-            <h4>Mitigating Credential Abuse &amp; Token Replay</h4>
-
-            <div class="flow-step-block">
-              <span class="step-flow-tag tag-attack">Attack Surface</span>
-              Credential stuffing, dictionary brute-forcing, and plain-text token interception over unencrypted channels.
-            </div>
-
-            <div class="flow-step-block defense-step">
-              <span class="step-flow-tag tag-defense">Defense Implementation</span>
-              Argon2/Bcrypt password hashing, short-lived JWT tokens, HttpOnly/SameSite cookies, and strict per-IP rate limiting.
-            </div>
-
-            <div class="flow-step-block result-step">
-              <span class="step-flow-tag tag-result">Outcome</span>
-              Attack surface minimized; brute-force attacks throttled; stolen client tokens rendered ineffective.
-            </div>
-          </div>
-
-          <!-- Example 2: Insecure Perimeter & Headers -->
-          <div class="defense-module-card">
-            <div class="defense-card-header">
-              <span class="defense-badge"><i class="fas fa-network-wired" aria-hidden="true"></i> Perimeter &amp; Headers</span>
-              <span class="project-number">02</span>
-            </div>
-
-            <h4>Hardening Web Perimeters &amp; Headers</h4>
-
-            <div class="flow-step-block">
-              <span class="step-flow-tag tag-attack">Attack Surface</span>
-              Exposed management ports, missing HTTP security headers, clickjacking in hidden iframes, and protocol downgrade.
-            </div>
-
-            <div class="flow-step-block defense-step">
-              <span class="step-flow-tag tag-defense">Defense Implementation</span>
-              Automated socket/Nmap port auditing, strict Content-Security-Policy (CSP), HSTS, and <code>X-Frame-Options: DENY</code>.
-            </div>
-
-            <div class="flow-step-block result-step">
-              <span class="step-flow-tag tag-result">Outcome</span>
-              Zero unnecessary open ports; clickjacking and cross-origin framing completely blocked at the browser layer.
-            </div>
-          </div>
-
-          <!-- Example 3: Injection & Parameter Tampering -->
-          <div class="defense-module-card">
-            <div class="defense-card-header">
-              <span class="defense-badge"><i class="fas fa-shield-virus" aria-hidden="true"></i> Data Sanitation</span>
-              <span class="project-number">03</span>
-            </div>
-
-            <h4>Neutralizing SQL Injection &amp; Bad Inputs</h4>
-
-            <div class="flow-step-block">
-              <span class="step-flow-tag tag-attack">Attack Surface</span>
-              Raw string concatenations in database queries and untyped parameters leading to unauthorized data extraction.
-            </div>
-
-            <div class="flow-step-block defense-step">
-              <span class="step-flow-tag tag-defense">Defense Implementation</span>
-              Pydantic v2 strict schema validation on all incoming payloads and SQLAlchemy parameterized ORM queries.
-            </div>
-
-            <div class="flow-step-block result-step">
-              <span class="step-flow-tag tag-result">Outcome</span>
-              Malformed data rejected at the boundary; SQL injection rendered structurally impossible.
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
 
     <!-- ===================================================
          9. SIGNATURE FEATURE #4: CURRENTLY BUILDING
@@ -1235,7 +1138,6 @@
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
-          <a href="#defense">Defense</a>
           <a href="#certifications">Certs</a>
           <a href="#contact">Contact</a>
         </nav>
