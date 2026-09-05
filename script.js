@@ -123,7 +123,7 @@
 
 
 // ======================================================
-// 2. INTERACTIVE EMAIL DIALOGUE MODAL (EmailJS)
+// 2. INTERACTIVE EMAIL CARD (EmailJS + Direct Client)
 // ======================================================
 (function initEmailModal() {
   'use strict';
@@ -150,33 +150,42 @@
 
   window.openEmailModal = function (e) {
     if (e && e.preventDefault) e.preventDefault();
-    if (!overlay) return;
-    overlay.classList.add('active');
-    overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    if (overlay) {
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    } else {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
     updateGmailShortcut();
     setTimeout(() => {
       if (fromInput) fromInput.focus();
-    }, 120);
+    }, overlay ? 120 : 450);
   };
 
   window.closeEmailModal = function () {
-    if (!overlay) return;
-    overlay.classList.remove('active');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (statusEl) {
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    if (statusEl && overlay) {
       statusEl.textContent = '';
-      statusEl.className = 'email-dialog-status';
+      statusEl.className = 'mail-status-feedback';
     }
   };
 
   function updateGmailShortcut() {
-    if (!gmailShortcut || !subjectInput || !fromInput || !messageInput) return;
+    if (!gmailShortcut) return;
     const recipient = 'shraoshibasak.9090@gmail.com';
-    const sub = encodeURIComponent(subjectInput.value.trim() || 'Portfolio Inquiry');
+    const sub = encodeURIComponent((subjectInput && subjectInput.value.trim()) || 'Portfolio Inquiry');
+    const sender = fromInput ? fromInput.value.trim() : '';
+    const msg = messageInput ? messageInput.value.trim() : '';
     const body = encodeURIComponent(
-      `From: ${fromInput.value.trim()}\n\n${messageInput.value.trim()}`
+      `From: ${sender}\n\n${msg}`
     );
     gmailShortcut.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${sub}&body=${body}`;
   }
@@ -184,6 +193,7 @@
   if (fromInput) fromInput.addEventListener('input', updateGmailShortcut);
   if (subjectInput) subjectInput.addEventListener('input', updateGmailShortcut);
   if (messageInput) messageInput.addEventListener('input', updateGmailShortcut);
+  updateGmailShortcut();
 
   if (closeBtn) closeBtn.addEventListener('click', window.closeEmailModal);
   if (cancelBtn) cancelBtn.addEventListener('click', window.closeEmailModal);
@@ -211,7 +221,7 @@
       if (!sender || !subject || !message) {
         if (statusEl) {
           statusEl.textContent = 'Please fill out all required fields.';
-          statusEl.className = 'email-dialog-status error';
+          statusEl.className = 'mail-status-feedback error';
         }
         return;
       }
@@ -223,7 +233,7 @@
 
       if (statusEl) {
         statusEl.textContent = 'Sending message...';
-        statusEl.className = 'email-dialog-status';
+        statusEl.className = 'mail-status-feedback';
       }
 
       if (typeof emailjs !== 'undefined' && emailjs.send) {
@@ -239,10 +249,20 @@
           .then(function () {
             if (statusEl) {
               statusEl.textContent = 'Message sent successfully! Thank you for reaching out.';
-              statusEl.className = 'email-dialog-status success';
+              statusEl.className = 'mail-status-feedback success';
             }
             form.reset();
-            setTimeout(window.closeEmailModal, 1800);
+            updateGmailShortcut();
+            setTimeout(() => {
+              if (overlay) {
+                window.closeEmailModal();
+              } else if (statusEl) {
+                setTimeout(() => {
+                  statusEl.textContent = '';
+                  statusEl.className = 'mail-status-feedback';
+                }, 4000);
+              }
+            }, 1800);
           })
           .catch(function (error) {
             console.warn('EmailJS fallback to mailto:', error);
@@ -250,9 +270,11 @@
             window.location.href = mailtoUrl;
             if (statusEl) {
               statusEl.textContent = 'Opening your email client...';
-              statusEl.className = 'email-dialog-status success';
+              statusEl.className = 'mail-status-feedback success';
             }
-            setTimeout(window.closeEmailModal, 1800);
+            setTimeout(() => {
+              if (overlay) window.closeEmailModal();
+            }, 1800);
           })
           .finally(function () {
             if (submitBtn) {
@@ -265,17 +287,21 @@
         window.location.href = mailtoUrl;
         if (statusEl) {
           statusEl.textContent = 'Opening your email client...';
-          statusEl.className = 'email-dialog-status success';
+          statusEl.className = 'mail-status-feedback success';
         }
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
         }
-        setTimeout(window.closeEmailModal, 1800);
+        setTimeout(() => {
+          if (overlay) window.closeEmailModal();
+        }, 1800);
       }
     });
   }
 })();
+
+
 
 
 // ======================================================

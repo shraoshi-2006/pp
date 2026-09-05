@@ -198,11 +198,6 @@
         <div class="hero-layout">
 
           <div class="hero-text-side">
-            <!-- Active Status Pill -->
-            <div class="status-pill">
-              <span class="status-dot" aria-hidden="true"></span>
-              <span>Available for internships</span>
-            </div>
 
             <p class="hero-intro">Hello, I'm Shraoshi Basak 👋</p>
 
@@ -267,8 +262,6 @@
                   <h3>Shraoshi Basak</h3>
                   <span class="handle-tag">@shraoshi-2006</span>
                 </div>
-                <p class="detail-focus">Focus: Network Auditing, Vulnerability Assessment, Next.js &amp; Python Tools
-                </p>
 
                 <div class="profile-social-strip">
                   <a href="https://github.com/shraoshi-2006" target="_blank" rel="noopener noreferrer"
@@ -846,57 +839,110 @@
 
 
     <!-- ===================================================
-         6. CONTACT SECTION
+         6. CONTACT SECTION (MAIL CARD)
     =================================================== -->
     <section id="contact" class="section-padded" aria-labelledby="contact-heading">
       <div class="container">
 
-        <div class="contact-box">
+        <div class="section-intro">
           <span class="eyebrow-tag">Get in Touch</span>
-          <h2 id="contact-heading" class="contact-title">Let's Connect &amp; Build Something Great</h2>
-          <p class="contact-sub">
-            Whether you have an internship opportunity, a project collaboration, or just want to chat about
-            cybersecurity and web engineering — feel free to reach out. I'm always happy to connect.
+          <h2 id="contact-heading" class="section-title">Let's Connect &amp; Build Something Great</h2>
+          <p class="section-subtitle">
+            Have an internship opportunity, a project collaboration, or want to discuss cybersecurity? Drop a message
+            directly below.
           </p>
+        </div>
 
-          <div class="contact-meta-pills">
-            <div class="meta-pill">
-              <i class="fas fa-location-dot" aria-hidden="true"></i>
-              <span>Kolkata, West Bengal, India</span>
+        <div class="contact-card-wrapper">
+          <div class="mail-client-card">
+
+            <!-- Mail Client Header Bar -->
+            <div class="mail-card-header">
+              <div class="mail-window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="mail-header-title">
+                <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+                <span>New Message</span>
+              </div>
+              <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shraoshibasak.9090@gmail.com"
+                target="_blank" rel="noopener noreferrer" class="mail-gmail-btn" id="email-gmail-shortcut"
+                title="Compose directly in Gmail">
+                <i class="fab fa-google" aria-hidden="true"></i>
+                <span>Open in Gmail</span>
+              </a>
             </div>
-            <div class="meta-pill">
-              <i class="fas fa-envelope" aria-hidden="true"></i>
-              <span>shraoshibasak.9090@gmail.com</span>
-            </div>
-            <div class="meta-pill">
-              <i class="fas fa-building-columns" aria-hidden="true"></i>
-              <span>GNIT MAKAUT</span>
-            </div>
-          </div>
 
-          <div class="contact-btn-group">
-            <button type="button" class="btn-primary"
-              onclick="if(window.openEmailModal){window.openEmailModal(event);}">
-              <i class="fas fa-paper-plane" aria-hidden="true"></i>
-              <span>Send Me a Message</span>
-            </button>
+            <!-- Mail Client Form -->
+            <form class="mail-card-form" id="email-dialog-form">
 
-            <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shraoshibasak.9090@gmail.com" target="_blank"
-              rel="noopener noreferrer" class="btn-secondary" title="Compose message in Gmail web app">
-              <i class="fab fa-google" aria-hidden="true"></i>
-              <span>Open in Gmail</span>
-            </a>
+              <!-- "To" Field (Preset & Locked) -->
+              <div class="mail-row">
+                <label for="email-modal-to-display" class="mail-label">To:</label>
+                <div class="mail-chip" id="email-modal-to-display">
+                  <img src="SB-logo.svg" onerror="this.onerror=null; this.src='SB-logo.png';" alt="SB"
+                    class="recipient-avatar">
+                  <span class="chip-name">Shraoshi Basak</span>
+                  <span class="chip-email">&lt;shraoshibasak.9090@gmail.com&gt;</span>
+                </div>
+                <input type="hidden" id="email-modal-to" name="to_email" value="shraoshibasak.9090@gmail.com">
+              </div>
 
-            <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" target="_blank" rel="noopener noreferrer"
-              class="btn-secondary">
-              <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-              <span>LinkedIn</span>
-            </a>
+              <!-- "From" Field -->
+              <div class="mail-row">
+                <label for="email-modal-from" class="mail-label">From:</label>
+                <input type="email" id="email-modal-from" name="user_email" class="mail-input"
+                  placeholder="your.email@example.com" required autocomplete="email">
+              </div>
 
-            <a href="Resume_.pdf" class="btn-ghost" download>
-              <i class="fas fa-file-arrow-down" aria-hidden="true"></i>
-              <span>Resume (PDF)</span>
-            </a>
+              <!-- "Subject" Field -->
+              <div class="mail-row">
+                <label for="email-modal-subject" class="mail-label">Subject:</label>
+                <input type="text" id="email-modal-subject" name="subject" class="mail-input"
+                  placeholder="Internship Opportunity / Project Collaboration / Inquiry" required>
+              </div>
+
+              <!-- "Message" Field -->
+              <div class="mail-row message-row">
+                <label for="email-modal-message" class="mail-label">Message:</label>
+                <textarea id="email-modal-message" name="message" class="mail-textarea" rows="5"
+                  placeholder="Hi Shraoshi, I came across your portfolio and would love to connect about..."
+                  required></textarea>
+              </div>
+
+              <!-- Status Feedback Message -->
+              <div class="mail-status-feedback" id="email-dialog-status" aria-live="polite"></div>
+
+              <!-- Mail Card Footer Actions -->
+              <div class="mail-card-footer">
+                <div class="mail-footer-meta">
+                  <span class="meta-item"><i class="fas fa-location-dot" aria-hidden="true"></i> Kolkata, India</span>
+                  <span class="meta-item"><i class="fas fa-graduation-cap" aria-hidden="true"></i> GNIT MAKAUT</span>
+                </div>
+
+                <div class="mail-footer-buttons">
+                  <a href="Resume_.pdf" class="btn-ghost mail-resume-btn" download title="Download Resume PDF">
+                    <i class="fas fa-file-arrow-down" aria-hidden="true"></i>
+                    <span>Resume</span>
+                  </a>
+
+                  <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" target="_blank"
+                    rel="noopener noreferrer" class="btn-secondary mail-linkedin-btn" title="LinkedIn Profile">
+                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                    <span>LinkedIn</span>
+                  </a>
+
+                  <button type="submit" class="btn-primary mail-submit-btn" id="email-modal-submit">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
           </div>
         </div>
 
@@ -911,135 +957,11 @@
   =================================================== -->
   <footer role="contentinfo" class="site-footer">
     <div class="container">
-      <div class="footer-layout">
-
-        <div class="footer-brand">
-          <div class="footer-logo-row">
-            <img src="SB-logo.svg" onerror="this.onerror=null; this.src='SB-logo.png';" alt="SB logo" width="30"
-              height="30">
-            <span class="footer-name">Shraoshi Basak</span>
-          </div>
-          <p class="footer-desc">Cybersecurity student &amp; full-stack developer at GNIT MAKAUT.</p>
-        </div>
-
-        <nav class="footer-nav" aria-label="Footer Navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="footer-socials">
-          <a href="https://github.com/shraoshi-2006" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <i class="fab fa-github" aria-hidden="true"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/shraoshi-basak-93200a327/" target="_blank" rel="noopener noreferrer"
-            aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-          </a>
-          <a href="https://www.instagram.com/its_me_shraoxi/" target="_blank" rel="noopener noreferrer"
-            aria-label="Instagram">
-            <i class="fab fa-instagram" aria-hidden="true"></i>
-          </a>
-          <a href="mailto:shraoshibasak.9090@gmail.com" aria-label="Email">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-          </a>
-        </div>
-
-      </div>
-
       <div class="footer-bottom">
         <p>&copy; 2026 Shraoshi Basak. Designed with simplicity, precision, and defensive principles.</p>
       </div>
     </div>
   </footer>
-
-
-  <!-- Scroll To Top Button -->
-  <button class="scroll-to-top" type="button" id="scrollToTop" aria-label="Scroll to top of page">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
-  </button>
-
-
-  <!-- ===================================================
-       EMAIL DIALOGUE MODAL (Working EmailJS Integration)
-  =================================================== -->
-  <div class="email-modal-overlay" id="email-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true"
-    aria-labelledby="email-dialog-title">
-    <div class="email-dialog-box">
-
-      <!-- Dialog Header -->
-      <div class="email-dialog-header">
-        <div class="email-dialog-title-wrap">
-          <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
-          <span id="email-dialog-title">Send a Message to Shraoshi</span>
-        </div>
-        <button type="button" class="email-dialog-close-btn" id="email-dialog-close"
-          onclick="if(window.closeEmailModal) window.closeEmailModal();" aria-label="Close dialog">
-          <i class="fas fa-times" aria-hidden="true"></i>
-        </button>
-      </div>
-
-      <!-- Dialog Form -->
-      <form class="email-dialog-form" id="email-dialog-form">
-
-        <!-- Recipient -->
-        <div class="email-field-row">
-          <label for="email-modal-to-display" class="email-field-label">To:</label>
-          <div class="email-recipient-chip" id="email-modal-to-display">
-            <img src="SB-logo.svg" onerror="this.onerror=null; this.src='SB-logo.png';" alt="SB"
-              class="recipient-avatar">
-            <span class="recipient-name">Shraoshi Basak</span>
-            <span class="recipient-address">&lt;shraoshibasak.9090@gmail.com&gt;</span>
-          </div>
-          <input type="hidden" id="email-modal-to" name="to_email" value="shraoshibasak.9090@gmail.com">
-        </div>
-
-        <!-- Sender Email -->
-        <div class="email-field-row">
-          <label for="email-modal-from" class="email-field-label">From:</label>
-          <input type="email" id="email-modal-from" name="user_email" class="email-field-input"
-            placeholder="your.name@example.com" required autocomplete="email">
-        </div>
-
-        <!-- Subject -->
-        <div class="email-field-row">
-          <label for="email-modal-subject" class="email-field-label">Subject:</label>
-          <input type="text" id="email-modal-subject" name="subject" class="email-field-input"
-            placeholder="Internship Opportunity / Project Collaboration / Hello" required>
-        </div>
-
-        <!-- Message Body -->
-        <div class="email-message-row">
-          <label for="email-modal-message" class="email-field-label">Message:</label>
-          <textarea id="email-modal-message" name="message" class="email-field-textarea" rows="5"
-            placeholder="Hi Shraoshi, I came across your portfolio and would love to connect about..."
-            required></textarea>
-        </div>
-
-        <!-- Status Notification -->
-        <div class="email-dialog-status" id="email-dialog-status" aria-live="polite"></div>
-
-        <!-- Dialog Footer Actions -->
-        <div class="email-dialog-footer">
-          <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shraoshibasak.9090@gmail.com" target="_blank"
-            rel="noopener noreferrer" class="email-gmail-shortcut-btn" id="email-gmail-shortcut"
-            title="Open directly in Gmail web app">
-            <i class="fab fa-google" aria-hidden="true"></i> Open in Gmail
-          </a>
-          <div class="dialog-footer-right">
-            <button type="button" class="email-modal-cancel-btn" id="email-modal-cancel"
-              onclick="if(window.closeEmailModal) window.closeEmailModal();">Discard</button>
-            <button type="submit" class="email-modal-submit-btn" id="email-modal-submit">
-              <span>Send Message</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-
-      </form>
-    </div>
-  </div>
 
 
   <!-- EmailJS Library -->
