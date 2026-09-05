@@ -1,7 +1,7 @@
 // ======================================================
-// SHRAOXI PORTFOLIO — CORE JAVASCRIPT ENGINE
-// Includes: Cyber Preloader, Custom Glass Cursor, Sticky Header,
-// Mobile Navigation, Interactive Security Console, and EmailJS Modal
+// SHRAOXI PORTFOLIO — CORE JAVASCRIPT
+// Handles: Sticky Navigation, Mobile Menu, Active Section Highlight,
+// Scroll-to-Top, and EmailJS Interactive Dialogue Modal.
 // ======================================================
 
 (function () {
@@ -10,172 +10,7 @@
 })();
 
 // ======================================================
-// 1. FUTURISTIC CYBER PRELOADER (1 TO 100% ENGINE)
-// ======================================================
-(function initPreloader() {
-  'use strict';
-
-  const preloader = document.getElementById('preloader');
-  const counterEl = document.getElementById('preloader-counter');
-  const barEl = document.getElementById('preloader-bar');
-  const statusEl = document.getElementById('preloader-status');
-
-  if (!preloader || !counterEl || !barEl || !statusEl) return;
-
-  document.body.classList.add('loading');
-
-  const telemetryMessages = [
-    { threshold: 0, text: '[SYS_BOOT] INITIALIZING QUANTUM PROTOCOLS...' },
-    { threshold: 25, text: '[SEC_CHK] COMPILING DEFENSIVE AUDIT CORE...' },
-    { threshold: 55, text: '[DEV_ENG] SYNCHRONIZING FASTAPI & NEXT.JS STACK...' },
-    { threshold: 80, text: '[INTERFACE] DECRYPTING PORTFOLIO WORKSTATION...' },
-    { threshold: 95, text: '[READY] SYSTEMS ONLINE. PREPARING VIEWPORT...' },
-    { threshold: 100, text: '[COMPLETE] ACCESS AUTHORIZED. WELCOME, VISITOR.' }
-  ];
-
-  let currentCount = 1;
-  const targetCount = 100;
-  const totalDuration = 1600; // 1.6s
-  const startTime = performance.now();
-
-  function updateTelemetry(val) {
-    for (let i = telemetryMessages.length - 1; i >= 0; i--) {
-      if (val >= telemetryMessages[i].threshold) {
-        statusEl.textContent = telemetryMessages[i].text;
-        break;
-      }
-    }
-  }
-
-  function tickPreloader(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / totalDuration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const calculatedCount = Math.min(Math.floor(1 + (targetCount - 1) * eased), 100);
-
-    if (calculatedCount > currentCount) {
-      currentCount = calculatedCount;
-      counterEl.textContent = currentCount;
-      barEl.style.width = currentCount + '%';
-      updateTelemetry(currentCount);
-    }
-
-    if (progress < 1) {
-      requestAnimationFrame(tickPreloader);
-    } else {
-      counterEl.textContent = '100';
-      barEl.style.width = '100%';
-      updateTelemetry(100);
-
-      setTimeout(() => {
-        preloader.classList.add('loaded');
-        document.body.classList.remove('loading');
-        setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 700);
-      }, 300);
-    }
-  }
-
-  requestAnimationFrame(tickPreloader);
-})();
-
-
-// ======================================================
-// 2. NEXT-GEN CUSTOM GLASS CURSOR (DESKTOP ONLY)
-// ======================================================
-(function initCursor() {
-  'use strict';
-
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-
-  const cursorDot = document.querySelector('[data-cursor-dot]');
-  const cursorRing = document.querySelector('[data-cursor-ring]');
-  const cursorGlow = document.querySelector('[data-cursor-glow]');
-
-  if (!cursorDot || !cursorRing) return;
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
-  let glowX = mouseX;
-  let glowY = mouseY;
-  let isHovered = false;
-  let isVisible = false;
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    if (!isVisible) {
-      isVisible = true;
-      cursorDot.classList.add('active');
-      cursorRing.classList.add('active');
-      if (cursorGlow) cursorGlow.classList.add('active');
-    }
-
-    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-  }, { passive: true });
-
-  function renderCursor() {
-    ringX += (mouseX - ringX) * 0.2;
-    ringY += (mouseY - ringY) * 0.2;
-    const ringScale = isHovered ? 'scale(1.4)' : 'scale(1)';
-    cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${ringScale}`;
-
-    if (cursorGlow) {
-      glowX += (mouseX - glowX) * 0.12;
-      glowY += (mouseY - glowY) * 0.12;
-      const glowScale = isHovered ? 'scale(1.6)' : 'scale(1)';
-      cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%) ${glowScale}`;
-    }
-
-    requestAnimationFrame(renderCursor);
-  }
-  requestAnimationFrame(renderCursor);
-
-  window.addEventListener('mousedown', () => cursorRing.classList.add('clicking'));
-  window.addEventListener('mouseup', () => cursorRing.classList.remove('clicking'));
-
-  document.addEventListener('mouseleave', () => {
-    isVisible = false;
-    cursorDot.classList.remove('active');
-    cursorRing.classList.remove('active');
-    if (cursorGlow) cursorGlow.classList.remove('active');
-  });
-
-  document.addEventListener('mouseenter', () => {
-    isVisible = true;
-    cursorDot.classList.add('active');
-    cursorRing.classList.add('active');
-    if (cursorGlow) cursorGlow.classList.add('active');
-  });
-
-  function bindHoverEvents() {
-    const targets = document.querySelectorAll('a, button, input, textarea, .cmd-chip, .tech-chip-item, .standard-project-card, .cert-card, .repo-card-mini');
-    targets.forEach((el) => {
-      el.addEventListener('mouseenter', () => {
-        isHovered = true;
-        cursorRing.classList.add('hovered');
-      });
-      el.addEventListener('mouseleave', () => {
-        isHovered = false;
-        cursorRing.classList.remove('hovered');
-      });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bindHoverEvents);
-  } else {
-    bindHoverEvents();
-  }
-})();
-
-
-// ======================================================
-// 3. HEADER SCROLL, ACTIVE NAVIGATION & MOBILE DRAWER
+// 1. HEADER SCROLL, ACTIVE NAVIGATION & MOBILE DRAWER
 // ======================================================
 (function initNavigation() {
   'use strict';
@@ -185,7 +20,7 @@
   const navMenu = document.getElementById('nav-menu');
   const scrollToTop = document.getElementById('scrollToTop');
 
-  // Sticky header background transition
+  // Sticky header background state
   function handleScroll() {
     const scrollY = window.scrollY;
     if (header) {
@@ -197,7 +32,7 @@
     }
 
     if (scrollToTop) {
-      if (scrollY > 400) {
+      if (scrollY > 350) {
         scrollToTop.classList.add('visible');
       } else {
         scrollToTop.classList.remove('visible');
@@ -256,14 +91,14 @@
     });
   }
 
-  // Active section indicator with IntersectionObserver
+  // Active section indicator using IntersectionObserver
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
 
   if ('IntersectionObserver' in window && sections.length > 0) {
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -60% 0px',
+      rootMargin: '-25% 0px -65% 0px',
       threshold: 0
     };
 
@@ -287,21 +122,18 @@
 })();
 
 
-
-
-
 // ======================================================
-// 5. INTERACTIVE EMAIL DIALOGUE MODAL ENGINE (EmailJS)
+// 2. INTERACTIVE EMAIL DIALOGUE MODAL (EmailJS)
 // ======================================================
 (function initEmailModal() {
   'use strict';
 
-  // Initialize EmailJS with preserved key
+  // Initialize EmailJS
   if (typeof emailjs !== 'undefined' && emailjs.init) {
     try {
       emailjs.init({ publicKey: "ZSyUTeaB8bz8sFtX4" });
     } catch (err) {
-      console.warn('EmailJS init notice:', err);
+      console.warn('EmailJS init note:', err);
     }
   }
 
@@ -325,7 +157,7 @@
     updateGmailShortcut();
     setTimeout(() => {
       if (fromInput) fromInput.focus();
-    }, 150);
+    }, 120);
   };
 
   window.closeEmailModal = function () {
@@ -378,7 +210,7 @@
 
       if (!sender || !subject || !message) {
         if (statusEl) {
-          statusEl.textContent = 'Please complete all required fields.';
+          statusEl.textContent = 'Please fill out all required fields.';
           statusEl.className = 'email-dialog-status error';
         }
         return;
@@ -390,7 +222,7 @@
       }
 
       if (statusEl) {
-        statusEl.textContent = 'Transmitting secure dispatch...';
+        statusEl.textContent = 'Sending message...';
         statusEl.className = 'email-dialog-status';
       }
 
@@ -406,11 +238,11 @@
         emailjs.send('service_ommgjzi', 'template_715eyqi', templateParams)
           .then(function () {
             if (statusEl) {
-              statusEl.textContent = 'Message delivered successfully! Thank you.';
+              statusEl.textContent = 'Message sent successfully! Thank you for reaching out.';
               statusEl.className = 'email-dialog-status success';
             }
             form.reset();
-            setTimeout(window.closeEmailModal, 1600);
+            setTimeout(window.closeEmailModal, 1800);
           })
           .catch(function (error) {
             console.warn('EmailJS fallback to mailto:', error);
@@ -420,7 +252,7 @@
               statusEl.textContent = 'Opening your email client...';
               statusEl.className = 'email-dialog-status success';
             }
-            setTimeout(window.closeEmailModal, 1600);
+            setTimeout(window.closeEmailModal, 1800);
           })
           .finally(function () {
             if (submitBtn) {
@@ -439,7 +271,7 @@
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
         }
-        setTimeout(window.closeEmailModal, 1600);
+        setTimeout(window.closeEmailModal, 1800);
       }
     });
   }
