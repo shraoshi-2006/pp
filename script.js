@@ -10,6 +10,192 @@
 })();
 
 // ======================================================
+// 0. LANDING SCREEN / PRELOADER & LIVE DATE/TIME ENGINE
+// ======================================================
+(function initLandingPreloader() {
+  'use strict';
+
+  const preloader = document.getElementById('preloader');
+  if (!preloader) return;
+
+  // Lock body scrolling while preloader is active
+  document.body.classList.add('loading');
+
+  const counterEl = document.getElementById('preloader-counter');
+  const barEl = document.getElementById('preloader-bar');
+  const statusEl = document.getElementById('preloader-status');
+  const skipBtn = document.getElementById('preloader-skip');
+  const dateEl = document.getElementById('landing-live-date');
+  const timeEl = document.getElementById('landing-live-time');
+  const tzEl = document.getElementById('landing-tz-badge');
+
+  // ----------------------------------------------------
+  // Live Date & Time Widget (Top Right)
+  // ----------------------------------------------------
+  let clockInterval = null;
+
+  function updateClock() {
+    const now = new Date();
+
+    if (dateEl) {
+      try {
+        const dateOptions = { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' };
+        dateEl.textContent = now.toLocaleDateString('en-US', dateOptions).toUpperCase();
+      } catch (e) {
+        const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+        const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+        const dayStr = days[now.getDay()];
+        const dateNum = String(now.getDate()).padStart(2, '0');
+        const monthStr = months[now.getMonth()];
+        const year = now.getFullYear();
+        dateEl.textContent = `${dayStr}, ${dateNum} ${monthStr} ${year}`;
+      }
+    }
+
+    if (timeEl) {
+      try {
+        const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        timeEl.textContent = now.toLocaleTimeString('en-US', timeOptions);
+      } catch (e) {
+        let hours = now.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        const secs = String(now.getSeconds()).padStart(2, '0');
+        timeEl.textContent = `${String(hours).padStart(2, '0')}:${mins}:${secs} ${ampm}`;
+      }
+    }
+
+    if (tzEl && !tzEl.dataset.initialized) {
+      try {
+        const tzMatch = new Date().toLocaleTimeString('en-us', { timeZoneName: 'short' }).split(' ');
+        const tzAbbr = tzMatch[tzMatch.length - 1];
+        if (tzAbbr && tzAbbr.length <= 5 && !tzAbbr.includes(':')) {
+          tzEl.textContent = tzAbbr;
+        } else {
+          const offset = -now.getTimezoneOffset();
+          const sign = offset >= 0 ? '+' : '-';
+          const offHours = Math.floor(Math.abs(offset) / 60);
+          const offMins = Math.abs(offset) % 60;
+          tzEl.textContent = `GMT${sign}${offHours}${offMins > 0 ? ':' + String(offMins).padStart(2, '0') : ''}`;
+        }
+      } catch (e) {
+        tzEl.textContent = 'LOCAL';
+      }
+      tzEl.dataset.initialized = 'true';
+    }
+  }
+
+  // Initial update and start 1-second interval
+  updateClock();
+  clockInterval = setInterval(updateClock, 1000);
+
+  // ----------------------------------------------------
+  // Slower Preloader Counter Progression (~3.4s)
+  // ----------------------------------------------------
+  const telemetryStages = [
+    { threshold: 0, text: '[SYS_BOOT] INITIALIZING SECURE PROTOCOLS...' },
+    { threshold: 20, text: '[DEFENSE_CORE] VERIFYING PERIMETER INTEGRITY...' },
+    { threshold: 45, text: '[CRYPT_ENGINE] SYNCHRONIZING NETWORK STACK...' },
+    { threshold: 70, text: '[SYS_DIAG] OPTIMIZING GRAPHICS & REPOSITORIES...' },
+    { threshold: 88, text: '[AUTHENTICATED] ACCESS GRANTED. PREPARING VIEWPORT...' },
+    { threshold: 100, text: '[COMPLETE] WELCOME TO SHRAOXI BASAK\'S PORTFOLIO' }
+  ];
+
+  let currentPercent = 0;
+  let isDismissed = false;
+  const totalDuration = 3400; // Paced smoothly to ~3.4 seconds
+  const startTime = performance.now();
+
+  function easeOutCubic(x) {
+    return 1 - Math.pow(1 - x, 3);
+  }
+
+  function updateTelemetry(pct) {
+    if (!statusEl) return;
+    for (let i = telemetryStages.length - 1; i >= 0; i--) {
+      if (pct >= telemetryStages[i].threshold) {
+        if (statusEl.textContent !== telemetryStages[i].text) {
+          statusEl.textContent = telemetryStages[i].text;
+        }
+        break;
+      }
+    }
+  }
+
+  function tick(currentTime) {
+    if (isDismissed) return;
+
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / totalDuration, 1);
+    const easedProgress = easeOutCubic(progress);
+    currentPercent = Math.min(100, Math.floor(easedProgress * 100));
+
+    if (counterEl) counterEl.textContent = currentPercent;
+    if (barEl) barEl.style.width = currentPercent + '%';
+    updateTelemetry(currentPercent);
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      currentPercent = 100;
+      if (counterEl) counterEl.textContent = '100';
+      if (barEl) barEl.style.width = '100%';
+      updateTelemetry(100);
+      setTimeout(dismissPreloader, 340);
+    }
+  }
+
+  requestAnimationFrame(tick);
+
+  // ----------------------------------------------------
+  // Dismissal & Clean Exit
+  // ----------------------------------------------------
+  function dismissPreloader() {
+    if (isDismissed) return;
+    isDismissed = true;
+
+    if (counterEl) counterEl.textContent = '100';
+    if (barEl) barEl.style.width = '100%';
+    if (statusEl) statusEl.textContent = '[COMPLETE] ACCESS GRANTED. WELCOME!';
+
+    preloader.classList.add('loaded');
+    document.body.classList.remove('loading');
+
+    // Clean up DOM and clock timer after transition ends
+    setTimeout(() => {
+      preloader.style.display = 'none';
+      if (clockInterval) {
+        clearInterval(clockInterval);
+        clockInterval = null;
+      }
+    }, 900);
+  }
+
+  // Skip button handler
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissPreloader();
+    });
+  }
+
+  // Escape or Space key to quickly skip
+  window.addEventListener('keydown', (e) => {
+    if ((e.key === 'Escape' || e.key === ' ') && !isDismissed && preloader.style.display !== 'none') {
+      dismissPreloader();
+    }
+  });
+
+  // Safety fallback after 6s in case backgrounded
+  setTimeout(() => {
+    if (!isDismissed) {
+      dismissPreloader();
+    }
+  }, 6000);
+})();
+
+// ======================================================
 // 1. HEADER SCROLL, ACTIVE NAVIGATION & MOBILE DRAWER
 // ======================================================
 (function initNavigation() {

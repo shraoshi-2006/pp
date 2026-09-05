@@ -111,14 +111,77 @@
   <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 
-<body>
+<body class="loading">
+
+  <!-- ===================================================
+       0. LANDING SCREEN / PRELOADER WITH TOP-RIGHT LIVE DATE & TIME
+  =================================================== -->
+  <aside id="preloader" class="preloader" aria-label="Loading portfolio" role="status">
+    <div class="preloader-bg-glow glow-p1" aria-hidden="true"></div>
+    <div class="preloader-bg-glow glow-p2" aria-hidden="true"></div>
+    <div class="preloader-grid" aria-hidden="true"></div>
+
+    <!-- Top Bar: Status Left, Live Date & Time Widget on Top Right -->
+    <div class="landing-top-bar">
+      <div class="landing-sys-badge">
+        <span class="sys-dot"></span>
+        <span class="sys-label">SYS_READY • SECURE CORE</span>
+      </div>
+
+      <div class="landing-datetime-widget" id="landing-datetime-widget" title="Live System Time">
+        <div class="datetime-icon" aria-hidden="true">
+          <i class="far fa-clock"></i>
+        </div>
+        <div class="datetime-content">
+          <div class="landing-date-text" id="landing-live-date">-- --- ----</div>
+          <div class="landing-time-text">
+            <span id="landing-live-time">--:--:-- --</span>
+            <span class="tz-pill" id="landing-tz-badge">LOCAL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Central High-Tech Scanner HUD -->
+    <div class="preloader-hud">
+      <div class="hud-scanner-wrap" aria-hidden="true">
+        <div class="hud-ring ring-outer"></div>
+        <div class="hud-ring ring-middle"></div>
+        <div class="hud-ring ring-inner"></div>
+        <div class="hud-center-node">
+          <div class="hud-emblem-badge">
+            <img src="SB-logo.svg" onerror="this.onerror=null; this.src='SB-logo.png';" alt="SB Logo" class="hud-emblem-img" width="66" height="66">
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Numeric Percentage Counter -->
+      <div class="preloader-counter-wrap">
+        <span class="preloader-num" id="preloader-counter">0</span><span class="preloader-symbol">%</span>
+      </div>
+
+      <!-- High-Tech Neon Progress Track -->
+      <div class="preloader-bar-track" aria-hidden="true">
+        <div class="preloader-bar-fill" id="preloader-bar"></div>
+        <div class="preloader-bar-glint"></div>
+      </div>
+
+      <!-- Dynamic Telemetry Log Text -->
+      <div class="preloader-status" id="preloader-status" aria-live="polite">
+        [SYS_BOOT] INITIALIZING SECURE PROTOCOLS...
+      </div>
+
+      <!-- Skip Button -->
+      <button type="button" class="preloader-skip-btn" id="preloader-skip" aria-label="Skip intro animation">
+        <span>Skip Intro</span>
+        <i class="fas fa-forward" aria-hidden="true"></i>
+      </button>
+    </div>
+  </aside>
 
   <!-- Custom Cursor System (Ring + Dot) -->
   <div class="cursor-ring" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
-
-  <!-- Accessible Skip Link -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Ambient Lighting Elements (Pure CSS, performant) -->
   <div class="ambient-glow-wrapper" aria-hidden="true">
@@ -236,10 +299,6 @@
               <div class="profile-photo-wrapper">
                 <img src="shraoshi.jpg.jpeg" alt="Portrait of Shraoshi Basak" width="360" height="440"
                   class="hero-portrait" loading="eager">
-                <div class="photo-badge">
-                  <span class="badge-dot"></span>
-                  <span>Active</span>
-                </div>
               </div>
 
               <div class="profile-card-details">
@@ -846,13 +905,8 @@
 
             <!-- Mail Client Header Bar -->
             <div class="mail-card-header">
-              <div class="mail-window-dots" title="Window Controls">
-                <span class="dot dot-red" aria-label="Close dot"></span>
-                <span class="dot dot-yellow" aria-label="Minimize dot"></span>
-                <span class="dot dot-green" aria-label="Expand dot"></span>
-              </div>
               <div class="mail-header-title">
-                <span class="live-dot" aria-hidden="true"></span>
+                <span class="live-dot" aria-hidden="false"></span>
                 <span class="title-text">New Message — Direct Inbox</span>
               </div>
               <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=shraoshibasak.9090@gmail.com"
@@ -897,9 +951,11 @@
                 <span class="topics-label">Quick Topic:</span>
                 <div class="topics-pills">
                   <button type="button" class="topic-pill" data-topic="💼 Internship Opportunity">💼 Internship</button>
-                  <button type="button" class="topic-pill" data-topic="🚀 Project Collaboration">🚀 Collaboration</button>
+                  <button type="button" class="topic-pill" data-topic="🚀 Project Collaboration">🚀
+                    Collaboration</button>
                   <button type="button" class="topic-pill" data-topic="🛡️ Security Discussion">🛡️ Security</button>
-                  <button type="button" class="topic-pill" data-topic="👋 Say Hello / General Inquiry">👋 Just Saying Hi</button>
+                  <button type="button" class="topic-pill" data-topic="👋 Say Hello / General Inquiry">👋 Just Saying
+                    Hi</button>
                 </div>
               </div>
 
