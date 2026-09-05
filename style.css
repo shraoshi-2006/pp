@@ -89,6 +89,77 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* =====================================================
+   CUSTOM CURSOR (RING + DOT)
+===================================================== */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100000;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(56, 189, 248, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease,
+              opacity 0.25s ease;
+  will-change: transform;
+}
+
+.cursor-dot.visible,
+.cursor-ring.visible {
+  opacity: 1;
+}
+
+/* Hover state on interactive items */
+.cursor-ring.hovered {
+  width: 48px;
+  height: 48px;
+  border-color: rgba(56, 189, 248, 0.85);
+  background-color: rgba(56, 189, 248, 0.08);
+}
+
+.cursor-dot.hovered {
+  background-color: #ffffff;
+}
+
+/* Active / Clicking state */
+.cursor-ring.clicking {
+  transform: translate3d(-50%, -50%, 0) scale(0.85);
+  background-color: rgba(56, 189, 248, 0.16);
+  border-color: var(--accent-primary);
+}
+
+/* Disable on touch/coarse devices */
+@media (pointer: coarse), (hover: none) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
+
 /* Accessible Skip Link */
 .skip-link {
   position: absolute;
@@ -1195,201 +1266,7 @@ img, svg {
 }
 
 
-/* =====================================================
-   9. CURRENTLY BUILDING & LEARNING (NOW)
-===================================================== */
-.building-card {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: clamp(24px, 4vw, 44px);
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: clamp(24px, 4vw, 36px);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
 
-.building-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(245, 158, 11, 0.1);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.building-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 2.5vw, 2rem);
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 4px;
-}
-
-.building-sub {
-  font-size: 0.98rem;
-  color: var(--accent-primary);
-  font-weight: 600;
-  margin-bottom: 14px;
-}
-
-.building-desc {
-  color: var(--text-secondary);
-  font-size: 0.98rem;
-  line-height: 1.7;
-  margin-bottom: 22px;
-}
-
-.building-sidebar {
-  background: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 22px 20px;
-}
-
-.building-sidebar h4 {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.learning-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.learning-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.learning-list li i {
-  color: var(--accent-emerald);
-  font-size: 0.85rem;
-  margin-top: 3px;
-}
-
-
-/* =====================================================
-   10. CERTIFICATIONS SECTION
-===================================================== */
-.certs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-}
-
-.cert-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: 24px 22px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
-}
-
-.cert-card:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card-hover);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-
-.cert-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.cert-badge-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-sm);
-  background: rgba(56, 189, 248, 0.12);
-  color: var(--accent-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-}
-
-.cert-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--accent-emerald);
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-}
-
-.cert-card h4 {
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.cert-org {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-.cert-summary {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.55;
-  margin-bottom: 20px;
-}
-
-.cert-link-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--accent-primary);
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  transition: all 0.2s ease;
-  width: fit-content;
-}
-
-.cert-link-btn:hover {
-  background: var(--accent-primary);
-  color: #090b0e;
-}
 
 
 /* =====================================================
@@ -1992,9 +1869,6 @@ img, svg {
     grid-template-columns: 1fr;
   }
 
-  .building-card {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 768px) {

@@ -276,3 +276,103 @@
     });
   }
 })();
+
+
+// ======================================================
+// 3. CUSTOM SMOOTH CURSOR (RING + DOT)
+// ======================================================
+(function initCursor() {
+  'use strict';
+
+  // Return early on touch / coarse pointer devices
+  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches) {
+    return;
+  }
+
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if (!dot || !ring) return;
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let ringX = -100;
+  let ringY = -100;
+  let isHovered = false;
+  let isClicking = false;
+  let isVisible = false;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isVisible) {
+      isVisible = true;
+      dot.classList.add('visible');
+      ring.classList.add('visible');
+      ringX = mouseX;
+      ringY = mouseY;
+    }
+
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  function renderRing() {
+    if (isVisible) {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+
+      const scale = isClicking ? 'scale(0.85)' : (isHovered ? 'scale(1.15)' : 'scale(1)');
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) ${scale}`;
+    }
+    requestAnimationFrame(renderRing);
+  }
+  requestAnimationFrame(renderRing);
+
+  window.addEventListener('mousedown', () => {
+    isClicking = true;
+    ring.classList.add('clicking');
+  });
+
+  window.addEventListener('mouseup', () => {
+    isClicking = false;
+    ring.classList.remove('clicking');
+  });
+
+  document.addEventListener('mouseleave', () => {
+    isVisible = false;
+    dot.classList.remove('visible');
+    ring.classList.remove('visible');
+  });
+
+  document.addEventListener('mouseenter', () => {
+    isVisible = true;
+    dot.classList.add('visible');
+    ring.classList.add('visible');
+  });
+
+  // Attach hover state to all interactive elements
+  function bindHoverTargets() {
+    const interactiveSelectors = 'a, button, input, textarea, select, label, .tag, .stat-card, .pillar-card, .project-card, .repo-item, .meta-pill';
+    const targets = document.querySelectorAll(interactiveSelectors);
+
+    targets.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        isHovered = true;
+        ring.classList.add('hovered');
+        dot.classList.add('hovered');
+      });
+      el.addEventListener('mouseleave', () => {
+        isHovered = false;
+        ring.classList.remove('hovered');
+        dot.classList.remove('hovered');
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindHoverTargets);
+  } else {
+    bindHoverTargets();
+  }
+})();
+
