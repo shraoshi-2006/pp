@@ -804,34 +804,7 @@ header.scrolled {
   color: var(--text-muted);
   max-width: 680px;
   line-height: 1.65;
-  margin-bottom: 26px;
-}
-
-/* Technical Identity Badges */
-.hero-badges-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 34px;
-}
-
-.hero-badge-item {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 5px 14px;
-  border-radius: var(--radius-sm);
-  background: rgba(168, 85, 247, 0.08);
-  border: 1px solid var(--border-subtle);
-  color: #e2e8f0;
-}
-
-.hero-badge-item i {
-  color: var(--accent-cyan);
-  margin-right: 6px;
+  margin-bottom: 36px;
 }
 
 /* Hero CTA Buttons */
