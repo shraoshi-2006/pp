@@ -1961,23 +1961,6 @@ img, svg {
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-faint);
-}
-
-.footer-action-row {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 18px;
-}
-
-.footer-hello-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 24px;
-  font-size: 0.9rem;
-  border-radius: var(--radius-full);
-}
-
 .footer-bottom p {
   margin: 0;
 }
@@ -2047,9 +2030,9 @@ img, svg {
     font-size: 1.05rem;
   }
 
-  .header-resume-btn,
   .header-cta-btn {
-    display: none;
+    padding: 7px 13px;
+    font-size: 0.82rem;
   }
 
   .projects-grid {
