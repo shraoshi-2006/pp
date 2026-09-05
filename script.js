@@ -279,7 +279,7 @@
           .finally(function () {
             if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
+              submitBtn.innerHTML = '<span>Say Hello</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
             }
           });
       } else {
@@ -291,7 +291,7 @@
         }
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
+          submitBtn.innerHTML = '<span>Say Hello</span> <i class="fas fa-paper-plane" aria-hidden="true"></i>';
         }
         setTimeout(() => {
           if (overlay) window.closeEmailModal();

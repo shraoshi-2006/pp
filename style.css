@@ -1638,19 +1638,13 @@ img, svg {
   font-size: 0.92rem;
 }
 
-.mail-resume-btn,
-.mail-linkedin-btn {
-  padding: 11px 16px;
-  font-size: 0.88rem;
-}
-
 /* =====================================================
    7. SIMPLIFIED FOOTER
 ===================================================== */
 .site-footer {
   background: var(--bg-body);
   border-top: 1px solid var(--border-subtle);
-  padding: 34px 0;
+  padding: 36px 0;
   position: relative;
   z-index: 1;
 }
@@ -1659,6 +1653,21 @@ img, svg {
   text-align: center;
   font-size: 0.85rem;
   color: var(--text-faint);
+}
+
+.footer-action-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.footer-hello-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  border-radius: var(--radius-full);
 }
 
 .footer-bottom p {
@@ -1788,9 +1797,7 @@ img, svg {
     width: 100%;
   }
 
-  .mail-submit-btn,
-  .mail-resume-btn,
-  .mail-linkedin-btn {
+  .mail-submit-btn {
     width: 100%;
     justify-content: center;
   }
