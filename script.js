@@ -235,18 +235,24 @@
     });
   }
 
-  // Mobile menu toggle
+  // Mobile menu toggle & backdrop
+  const navBackdrop = document.getElementById('nav-backdrop');
+
   if (navToggle && navMenu) {
     const icon = navToggle.querySelector('i');
 
     function openNav() {
       navMenu.classList.add('active');
+      if (navBackdrop) navBackdrop.classList.add('active');
+      document.body.classList.add('nav-open');
       navToggle.setAttribute('aria-expanded', 'true');
       if (icon) icon.className = 'fas fa-times';
     }
 
     function closeNav() {
       navMenu.classList.remove('active');
+      if (navBackdrop) navBackdrop.classList.remove('active');
+      document.body.classList.remove('nav-open');
       navToggle.setAttribute('aria-expanded', 'false');
       if (icon) icon.className = 'fas fa-bars';
     }
@@ -259,6 +265,10 @@
         openNav();
       }
     });
+
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', closeNav);
+    }
 
     navMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', closeNav);
@@ -275,6 +285,12 @@
         closeNav();
       }
     });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 880 && navMenu.classList.contains('active')) {
+        closeNav();
+      }
+    }, { passive: true });
   }
 
   // Active section indicator using IntersectionObserver
