@@ -2,11 +2,11 @@
    SHRAOXI PORTFOLIO — MODERN, CLEAN & HUMAN DESIGN SYSTEM
    Identity: Shraoshi Basak — Cybersecurity Student & Full-Stack Developer
    Palette: Deep Slate/Obsidian, Soft Indigo, Electric Azure, Emerald Accent
-   Typography: Plus Jakarta Sans (Primary), Space Grotesk (Display), JetBrains Mono (Code)
+   Typography: Inter (Primary & Heading), JetBrains Mono (Code)
    Aesthetic: Editorial Tech, Clean Simplicity, High-End Polish
 ===================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* =====================================================
    1. DESIGN TOKENS & CSS VARIABLES
@@ -40,8 +40,8 @@
   --border-hover: rgba(255, 255, 255, 0.22);
 
   /* Typography Fonts */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Space Grotesk', var(--font-sans);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Inter', var(--font-sans);
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing & Layout */
