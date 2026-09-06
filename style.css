@@ -13,11 +13,11 @@
 ===================================================== */
 :root {
   /* Surfaces */
-  --bg-body: #090b0e;
-  --bg-surface: #0f1217;
-  --bg-surface-elevated: #151921;
-  --bg-card: rgba(15, 18, 23, 0.75);
-  --bg-card-hover: rgba(21, 25, 33, 0.88);
+  --bg-body: #000000;
+  --bg-surface: #0a0a0c;
+  --bg-surface-elevated: #111114;
+  --bg-card: rgba(10, 10, 12, 0.75);
+  --bg-card-hover: rgba(18, 18, 22, 0.88);
   --bg-subtle: rgba(255, 255, 255, 0.03);
 
   /* Accents */
@@ -114,7 +114,7 @@ body.nav-open {
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  background: radial-gradient(circle at center, #0f1521 0%, #05070a 100%);
+  background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
   z-index: 99999999;
   display: flex;
   align-items: center;
@@ -653,7 +653,7 @@ img, svg {
 }
 
 .section-alt {
-  background-color: rgba(15, 18, 23, 0.4);
+  background-color: rgba(10, 10, 12, 0.35);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -700,7 +700,7 @@ img, svg {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(9, 11, 14, 0.82);
+  background: rgba(0, 0, 0, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
@@ -708,9 +708,9 @@ img, svg {
 }
 
 #site-header.scrolled {
-  background: rgba(9, 11, 14, 0.94);
+  background: rgba(0, 0, 0, 0.92);
   border-bottom-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .header-container {
@@ -1141,7 +1141,7 @@ img, svg {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(9, 11, 14, 0.85);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 5px 12px;
@@ -2537,7 +2537,7 @@ img, svg {
     max-height: calc(100vh - var(--header-height, 68px));
     max-height: calc(100dvh - var(--header-height, 68px));
     overflow-y: auto;
-    background: rgba(9, 11, 14, 0.98);
+    background: rgba(0, 0, 0, 0.96);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--border-medium);
