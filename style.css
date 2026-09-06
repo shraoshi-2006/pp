@@ -82,6 +82,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height, 76px);
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -91,6 +92,7 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.68;
+  overflow-x: hidden;
   overflow-x: clip;
   position: relative;
   -webkit-font-smoothing: antialiased;
