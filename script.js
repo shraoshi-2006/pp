@@ -621,7 +621,7 @@
 
   // Attach hover state to all interactive elements
   function bindHoverTargets() {
-    const interactiveSelectors = 'a, button, input, textarea, select, label, .tag, .stat-card, .pillar-card, .project-card, .repo-item, .meta-pill, .topic-pill, .mail-window-dots, .mail-chip';
+    const interactiveSelectors = 'a, button, input, textarea, select, label, .tag, .stat-card, .education-card, .highlight-item, .pillar-card, .project-card, .repo-item, .meta-pill, .topic-pill, .mail-window-dots, .mail-chip';
     const targets = document.querySelectorAll(interactiveSelectors);
 
     targets.forEach((el) => {
